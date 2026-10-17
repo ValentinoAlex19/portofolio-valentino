@@ -3,263 +3,426 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentino Alexandro Wullur — Professional Portfolio & Tech Builder</title>
+    <title>Valentino Alexandro Wullur — Futuristic Tech & Insurance Architecture</title>
+    
+    <meta property="og:title" content="Valentino Alexandro Wullur | Portfolio">
+    <meta property="og:description" content="MDP PT Kalibesar Raya Utama Cabang Palu. Digital Risk Mitigation & Web Architecture.">
+    <meta property="og:image" content="https://ui-avatars.com/api/?name=Valentino+Alexandro&background=2563eb&color=fff&size=500">
+    <meta property="og:type" content="website">
+
     <style>
-        /* ---------------------------------------------------------
-           1. SKEMA WARNA & VARIABEL GLOBAL (Light & Dark Mode)
-        --------------------------------------------------------- */
         :root {
-            /* Tema Terang (Light) - Professional Sapphire */
-            --canvas: #f4f4f5; 
-            --card: #ffffff; 
-            --navy: #18181b; 
-            --slate: #52525b;
-            --border: #e4e4e7; 
-            --accent: #2563eb; 
-            --accent-hover: #1d4ed8; 
-            --accent-soft: #eff6ff;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
-            --shadow-lift: 0 16px 32px -6px rgba(37, 99, 235, 0.15); 
-            --radius: 16px;
+            --canvas: #f1f5f9;
+            --card: rgba(255, 255, 255, 0.85);
+            --card-hover: rgba(255, 255, 255, 0.98);
+            --navy: #090d16;
+            --slate: #475569;
+            --border: rgba(226, 232, 240, 0.9);
+            --accent: #2563eb;
+            --accent-glow: rgba(37, 99, 235, 0.25);
+            --cyan: #06b6d4;
+            --emerald: #10b981;
+            --shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.06);
+            --shadow-lift: 0 16px 40px -4px rgba(37, 99, 235, 0.2);
+            --radius: 20px;
+            --cursor-display: none;
         }
 
-        /* Tema Gelap (Dark) */
         [data-theme="dark"] {
-            --canvas: #09090b; 
-            --card: #18181b; 
-            --navy: #fafafa; 
-            --slate: #a1a1aa;
-            --border: #27272a; 
-            --accent: #3b82f6; 
-            --accent-hover: #60a5fa; 
-            --accent-soft: rgba(59, 130, 246, 0.15);
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-            --shadow-lift: 0 16px 32px -6px rgba(0, 0, 0, 0.4);
+            --canvas: #05070c;
+            --card: rgba(13, 17, 28, 0.75);
+            --card-hover: rgba(17, 24, 39, 0.9);
+            --navy: #f8fafc;
+            --slate: #94a3b8;
+            --border: rgba(30, 41, 59, 0.8);
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.35);
+            --cyan: #22d3ee;
+            --emerald: #34d399;
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            --shadow-lift: 0 20px 48px -4px rgba(59, 130, 246, 0.3);
         }
+
+        @media (pointer: fine) { :root { --cursor-display: block; cursor: none; } }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
 
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            background: var(--canvas); 
-            color: var(--navy); 
-            line-height: 1.6; 
-            -webkit-font-smoothing: antialiased; 
-            overflow-x: hidden; 
-            transition: background 0.3s ease, color 0.3s ease;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--canvas);
+            color: var(--navy);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            transition: background 0.4s ease, color 0.4s ease;
+            position: relative;
         }
 
-        /* Animasi Masuk Global */
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fade { animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        
-        /* Animasi Scroll Reveal */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        /* Animasi Skeleton Shimmer */
-        @keyframes shimmer { 0% { background-position: -1000px 0; } 100% { background-position: 1000px 0; } }
-        .skeleton { 
-            background: linear-gradient(90deg, var(--border) 25%, var(--canvas) 50%, var(--border) 75%);
-            background-size: 1000px 100%;
-            animation: shimmer 2s infinite linear;
-            border-radius: 8px;
-            color: transparent !important;
+        /* Latar Belakang Futuristik Cyber Mesh */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: 
+                radial-gradient(circle at 15% 20%, var(--accent-glow) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 40%);
+            z-index: -1;
             pointer-events: none;
         }
-        
-        /* Animasi Teks Mesin Ketik */
-        .typewriter-text {
-            border-right: 2px solid var(--accent);
-            white-space: nowrap;
-            overflow: hidden;
-            display: inline-block;
-            animation: blinkCursor 0.75s step-end infinite;
-        }
-        @keyframes blinkCursor { from, to { border-color: transparent } 50% { border-color: var(--accent); } }
 
-        /* ---------------------------------------------------------
-           2. NAVIGASI & HEADER
-        --------------------------------------------------------- */
-        header { position: sticky; top: 16px; z-index: 1000; padding: 0 24px; display: flex; justify-content: center; }
-        nav { 
-            width: 100%; max-width: 1150px; background: var(--card); border: 1px solid var(--border); 
-            border-radius: 9999px; padding: 10px 20px; display: flex; align-items: center; 
-            justify-content: space-between; box-shadow: var(--shadow); transition: 0.3s ease;
+        /* Elemen Geometris 3D di Latar Belakang */
+        .cyber-cube {
+            position: fixed; top: 50%; left: 80%;
+            width: 300px; height: 300px;
+            border: 2px solid var(--cyan);
+            background: linear-gradient(135deg, rgba(6,182,212,0.05), rgba(37,99,235,0.05));
+            backdrop-filter: blur(5px);
+            z-index: -1; pointer-events: none;
+            transform-style: preserve-3d;
+            transition: transform 0.1s linear;
+            opacity: 0.6;
         }
-        .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 0.95rem; }
-        .badge { background: var(--accent-soft); color: var(--accent); font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid var(--border); }
-        
-        .links { display: flex; align-items: center; gap: 20px; }
-        .links a { text-decoration: none; font-size: 0.88rem; font-weight: 600; color: var(--slate); transition: color 0.2s; }
+        .cyber-cube.left-side {
+            top: 15%; left: -5%;
+            width: 200px; height: 200px;
+            border-color: var(--accent); border-radius: 30%;
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            display: var(--cursor-display); position: fixed; top: 0; left: 0; width: 20px; height: 20px;
+            border: 2px solid var(--cyan); border-radius: 50%; pointer-events: none; z-index: 99999;
+            transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+            mix-blend-mode: difference;
+        }
+        .custom-cursor.hover { width: 44px; height: 44px; background: rgba(34, 211, 238, 0.25); border-color: var(--accent); }
+
+        /* Scroll Progress */
+        #scroll-progress {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--cyan));
+            width: 0%; z-index: 100000;
+        }
+
+        /* Header Navigasi Glassmorphic */
+        header { position: sticky; top: 16px; z-index: 1000; padding: 0 20px; display: flex; justify-content: center; }
+        nav {
+            width: 100%; max-width: 1150px;
+            background: var(--card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 9999px;
+            padding: 8px 18px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: var(--shadow);
+            transition: 0.3s ease;
+        }
+        .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 0.92rem; letter-spacing: -0.02em; cursor: pointer; }
+        .badge {
+            background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(6,182,212,0.15));
+            color: var(--accent); font-size: 0.7rem; font-weight: 700; padding: 3px 10px;
+            border-radius: 9999px; border: 1px solid var(--border);
+        }
+
+        .links { display: flex; align-items: center; gap: 18px; }
+        .links a { text-decoration: none; font-size: 0.86rem; font-weight: 600; color: var(--slate); transition: color 0.2s; cursor: pointer; }
         .links a:hover { color: var(--accent); }
-        
-        .btn-nav { background: var(--accent); color: #fff !important; padding: 8px 18px; border-radius: 9999px; transition: 0.2s !important; border: none; font-weight: 600; font-size: 0.88rem; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;}
-        .btn-nav:hover { background: var(--accent-hover); transform: scale(1.03); }
 
-        .btn-theme { background: transparent; border: 1px solid var(--border); border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--navy); transition: 0.2s; }
-        .btn-theme:hover { background: var(--accent-soft); color: var(--accent); }
+        .btn-nav {
+            background: linear-gradient(135deg, var(--accent), #1d4ed8);
+            color: #fff !important; padding: 8px 18px; border-radius: 9999px; font-weight: 600;
+            font-size: 0.86rem; text-decoration: none; border: none; cursor: pointer; transition: 0.3s;
+            box-shadow: 0 4px 14px var(--accent-glow);
+        }
+        .btn-nav:hover { transform: scale(1.03); filter: brightness(1.1); }
 
-        .nav-toggle { display: none; background: none; border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; cursor: pointer; color: var(--navy); }
-        .nav-toggle svg { display: block; width: 22px; height: 22px; }
+        .nav-controls { display: flex; align-items: center; gap: 8px; }
+        .btn-icon-switch {
+            background: transparent; border: 1px solid var(--border); border-radius: 50%;
+            width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; color: var(--navy); transition: 0.2s; font-size: 0.75rem; font-weight: 700;
+        }
+        .btn-icon-switch:hover { background: var(--border); color: var(--accent); }
 
-        .container { max-width: 1150px; margin: 40px auto 80px; padding: 0 24px; }
-        section { scroll-margin-top: 100px; }
+        .nav-toggle { display: none; background: none; border: 1px solid var(--border); border-radius: 8px; padding: 6px; cursor: pointer; color: var(--navy); }
+        .nav-toggle svg { width: 20px; height: 20px; }
 
-        /* ---------------------------------------------------------
-           3. HERO & PROFIL UTAMA
-        --------------------------------------------------------- */
-        .hero { display: flex; align-items: center; gap: 40px; margin-bottom: 50px; padding: 20px 10px 0; }
+        .container { max-width: 1150px; margin: 30px auto 80px; padding: 0 20px; }
+        section { scroll-margin-top: 90px; }
+
+        /* Hero */
+        .hero { display: flex; align-items: center; gap: 40px; margin-bottom: 45px; padding: 10px 5px; }
         .hero-img-box { position: relative; flex-shrink: 0; }
-        .avatar { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--card); box-shadow: var(--shadow); background: var(--border); transition: border-color 0.3s; }
-        
-        .btn-edit { position: absolute; bottom: 4px; right: 4px; background: var(--accent); color: #fff; border: 2px solid var(--card); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 10px rgba(37,99,235,0.3); transition: 0.2s; z-index: 10;}
-        .btn-edit:hover { background: var(--accent-hover); transform: scale(1.1); }
-        
-        .pill { display: inline-flex; align-items: center; gap: 8px; background: var(--card); border: 1px solid var(--border); padding: 6px 14px; border-radius: 9999px; font-size: 0.82rem; font-weight: 600; color: var(--slate); margin-bottom: 16px; box-shadow: var(--shadow); transition: 0.3s; }
-        .dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; }
-        h1 { font-size: 2.3rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 14px; min-height: 80px;} /* Min-height for typing effect */
-        h1 span { color: var(--accent); }
-        .hero p { font-size: 1.05rem; color: var(--slate); line-height: 1.65; max-width: 800px; }
+        .avatar {
+            width: 145px; height: 145px; border-radius: 50%; object-fit: cover;
+            border: 3px solid var(--accent); padding: 4px; background: var(--card);
+            box-shadow: 0 0 30px var(--accent-glow); transition: 0.3s;
+        }
+        .avatar:hover { transform: scale(1.03); }
+        .btn-edit {
+            position: absolute; bottom: 2px; right: 2px; background: var(--accent);
+            color: #fff; border: 2px solid var(--card); width: 34px; height: 34px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: var(--shadow); transition: 0.2s; z-index: 10;
+        }
+        .btn-edit:hover { transform: scale(1.15) rotate(10deg); }
 
-        /* ---------------------------------------------------------
-           4. BENTO GRID SYSTEM
-        --------------------------------------------------------- */
-        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease; display: flex; flex-direction: column; position: relative; }
-        .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); border-color: var(--accent-hover); }
-        
-        /* 3D Tilt Effect applied via JS to .card-featured */
-        .card-featured { grid-column: span 8; background: linear-gradient(135deg, var(--card) 40%, var(--accent-soft) 100%); border-color: var(--border); transform-style: preserve-3d; perspective: 1000px;}
-        .card-featured-inner { transform: translateZ(30px); /* Brings content forward in 3D */ }
-        .tag { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 10px; display: inline-block; }
-        .card-featured h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 10px; }
-        .card-featured p { color: var(--slate); font-size: 0.95rem; margin-bottom: 24px; max-width: 580px; }
-        
-        .action-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
-        .btn-launch { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; padding: 10px 20px; border-radius: 12px; font-weight: 700; font-size: 0.9rem; text-decoration: none; box-shadow: 0 4px 12px rgba(37,99,235,0.25); transition: 0.2s; border: none; cursor: pointer;}
-        .btn-launch:hover { background: var(--accent-hover); transform: translateY(-2px); }
-        .btn-secondary { background: var(--canvas); color: var(--navy); border: 1px solid var(--border); box-shadow: none; }
-        .btn-secondary:hover { border-color: var(--accent); background: var(--accent-soft); }
+        .pill {
+            display: inline-flex; align-items: center; gap: 8px; background: var(--card);
+            border: 1px solid var(--border); padding: 5px 14px; border-radius: 9999px;
+            font-size: 0.8rem; font-weight: 600; color: var(--slate); margin-bottom: 14px;
+            box-shadow: var(--shadow);
+        }
+        .dot { width: 8px; height: 8px; background: var(--emerald); border-radius: 50%; position: relative; }
+        .dot::after {
+            content: ''; position: absolute; inset: -4px; border-radius: 50%;
+            border: 2px solid var(--emerald); animation: radar 2s infinite ease-out; opacity: 0;
+        }
+        @keyframes radar { 0% { transform: scale(0.4); opacity: 1; } 100% { transform: scale(2.2); opacity: 0; } }
+
+        h1 { font-size: 2.3rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1.2; margin-bottom: 12px; }
+        h1 span { background: linear-gradient(135deg, var(--accent), var(--cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .typewriter-text { border-right: 2px solid var(--cyan); white-space: nowrap; animation: blink 0.8s step-end infinite; }
+        @keyframes blink { 50% { border-color: transparent; } }
+        .hero p { font-size: 1.02rem; color: var(--slate); line-height: 1.6; max-width: 820px; }
+
+        /* Bento Grid */
+        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+        .card {
+            background: var(--card); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border); border-radius: var(--radius); padding: 26px;
+            box-shadow: var(--shadow); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s;
+            display: flex; flex-direction: column; position: relative; overflow: hidden;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lift); border-color: var(--accent); }
+
+        /* Card Featured KBRU dengan 3D Tilt */
+        .card-featured {
+            grid-column: span 8;
+            background: linear-gradient(135deg, var(--card) 40%, rgba(37,99,235,0.08) 100%);
+            transform-style: preserve-3d; perspective: 1000px;
+        }
+        .card-featured-inner { transform: translateZ(25px); }
+        .tag { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--cyan); margin-bottom: 8px; display: inline-block; }
+        .card-featured h2 { font-size: 1.55rem; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em; }
+        .card-featured p { color: var(--slate); font-size: 0.92rem; margin-bottom: 22px; max-width: 580px; }
+
+        .btn-launch-group { display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn-action {
+            display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px;
+            border-radius: 12px; font-weight: 700; font-size: 0.88rem; text-decoration: none;
+            cursor: pointer; border: none; transition: 0.25s;
+        }
+        .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 14px var(--accent-glow); }
+        .btn-primary:hover { filter: brightness(1.15); transform: translateY(-2px); }
+        .btn-secondary { background: var(--card); color: var(--navy); border: 1px solid var(--border); }
+        .btn-secondary:hover { border-color: var(--cyan); color: var(--cyan); }
+
+        /* Widget Status, WITA & Cuaca Palu */
+        .card-hud {
+            grid-column: span 4; display: flex; flex-direction: column; justify-content: space-between;
+            background: linear-gradient(135deg, var(--card) 0%, rgba(6,182,212,0.06) 100%);
+        }
+        .hud-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+        .hud-box { background: rgba(0,0,0,0.02); border: 1px solid var(--border); border-radius: 12px; padding: 12px; }
+        [data-theme="dark"] .hud-box { background: rgba(255,255,255,0.02); }
+        .hud-label { font-size: 0.7rem; font-weight: 700; color: var(--slate); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+        .hud-value { font-size: 1.45rem; font-weight: 800; color: var(--navy); font-variant-numeric: tabular-nums; }
+        .weather-badge { font-size: 0.75rem; color: var(--cyan); font-weight: 600; margin-top: 2px; }
 
         .card-role { grid-column: span 4; }
-        .role-period { font-size: 0.8rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; display: block; }
-        .card-role h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
-        .card-role p, .card-career .desc, .card-edu p, .card-skills p { font-size: 0.88rem; color: var(--slate); line-height: 1.55; }
-        .role-highlight { margin-top: 18px; background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 0.82rem; color: var(--accent); font-weight: 600; }
+        .role-period { font-size: 0.78rem; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; display: block; }
+        .card-role h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
+        .card-role p, .card-career .desc, .card-skills p { font-size: 0.88rem; color: var(--slate); line-height: 1.5; }
+        .role-highlight { margin-top: 14px; background: rgba(37,99,235,0.08); border-left: 3px solid var(--accent); padding: 8px 12px; border-radius: 0 8px 8px 0; font-size: 0.8rem; color: var(--accent); font-weight: 600; }
 
-        .card-career { grid-column: span 7; }
-        .card-career h3, .card-skills h3, .card-contact h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 16px; }
-        .timeline { position: relative; padding-left: 24px; margin-bottom: 18px; border-left: 2px solid var(--border); }
+        .card-career { grid-column: span 8; }
+        .card-career h3, .card-skills h3, .card-contact h3 { font-size: 1.18rem; font-weight: 700; margin-bottom: 16px; }
+        .timeline { position: relative; padding-left: 20px; margin-bottom: 16px; border-left: 2px solid var(--border); }
         .timeline:last-child { margin-bottom: 0; }
-        .timeline::before { content: ''; position: absolute; left: -6px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid var(--card); }
-        .t-title { font-size: 0.95rem; font-weight: 700; }
-        .t-time { font-size: 0.78rem; color: var(--slate); font-weight: 600; margin-bottom: 4px; }
+        .timeline::before { content: ''; position: absolute; left: -5px; top: 5px; width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); }
+        .t-title { font-size: 0.92rem; font-weight: 700; }
+        .t-time { font-size: 0.76rem; color: var(--slate); font-weight: 600; margin-bottom: 3px; }
 
-        .card-skills { grid-column: span 5; }
-        .pill-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
-        .skill-pill { background: var(--canvas); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--navy); transition: 0.2s;}
-        .skill-pill:hover { background: var(--accent-soft); color: var(--accent); border-color: var(--accent);}
-        
-        /* Widget Dual Feed Kompak */
+        .card-skills { grid-column: span 12; }
+        .pill-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .skill-pill {
+            background: var(--canvas); border: 1px solid var(--border); padding: 6px 14px;
+            border-radius: 9999px; font-size: 0.82rem; font-weight: 600; color: var(--navy);
+            transition: 0.2s; cursor: default;
+        }
+        .skill-pill:hover { border-color: var(--accent); color: var(--accent); background: var(--card); transform: translateY(-2px); }
+
+        /* Database Feed & Live Search */
         .card-feed { grid-column: span 12; }
-        .feed-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 14px; }
-        .feed-item { display: flex; align-items: center; gap: 14px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px; box-shadow: var(--shadow); transition: 0.2s; text-decoration: none; }
-        .feed-item:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-lift); }
-        .feed-media { width: 48px; height: 48px; flex-shrink: 0; border-radius: 8px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .feed-media img { width: 100%; height: 100%; object-fit: cover; }
-        .feed-media svg { color: #e11d48; width: 24px; height: 24px; } 
-        .feed-desc { font-size: 0.88rem; font-weight: 600; color: var(--navy); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .feed-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 18px; }
+        .feed-search-wrap { display: flex; gap: 8px; flex: 1; max-width: 420px; min-width: 260px; }
+        .search-input {
+            width: 100%; padding: 8px 14px; border: 1px solid var(--border); border-radius: 10px;
+            background: var(--canvas); color: var(--navy); font-size: 0.86rem; outline: none; transition: 0.2s;
+        }
+        .search-input:focus { border-color: var(--cyan); box-shadow: 0 0 10px rgba(6,182,212,0.2); }
+        
+        .filter-tabs { display: flex; gap: 6px; background: var(--canvas); padding: 4px; border-radius: 10px; border: 1px solid var(--border); }
+        .filter-btn {
+            background: transparent; border: none; padding: 6px 12px; border-radius: 8px;
+            font-size: 0.8rem; font-weight: 600; color: var(--slate); cursor: pointer; transition: 0.2s;
+        }
+        .filter-btn.active { background: var(--card); color: var(--accent); box-shadow: var(--shadow); }
 
-        /* ---------------------------------------------------------
-           5. FORMULIR KONTAK TERINTEGRASI
-        --------------------------------------------------------- */
-        .card-contact { grid-column: span 12; display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; }
+        .feed-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; }
+        .feed-item {
+            display: flex; align-items: center; gap: 14px; background: var(--card); border: 1px solid var(--border);
+            border-radius: 14px; padding: 12px 14px; box-shadow: var(--shadow); text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .feed-item:hover { border-color: var(--cyan); transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+        .feed-item.hidden { display: none; }
+        .feed-media {
+            width: 46px; height: 46px; flex-shrink: 0; border-radius: 10px;
+            background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(6,182,212,0.15));
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
+        }
+        .feed-media img { width: 100%; height: 100%; object-fit: cover; }
+        .feed-media svg { color: #f43f5e; width: 22px; height: 22px; }
+        .feed-badge { font-size: 0.65rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; }
+        .feed-desc { font-size: 0.86rem; font-weight: 600; color: var(--navy); line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+        /* Skeleton Loading */
+        @keyframes shimmer { 0% { background-position: -800px 0; } 100% { background-position: 800px 0; } }
+        .skeleton {
+            background: linear-gradient(90deg, var(--border) 25%, var(--canvas) 50%, var(--border) 75%);
+            background-size: 800px 100%; animation: shimmer 1.8s infinite linear; border-radius: 8px; color: transparent !important; pointer-events: none;
+        }
+
+        /* Formulir Kontak */
+        .card-contact { grid-column: span 12; display: grid; grid-template-columns: 1fr 1.4fr; gap: 36px; }
         .contact-info p { font-size: 0.9rem; color: var(--slate); margin-bottom: 20px; }
         .social-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
-        .social-btn { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--canvas); color: var(--navy); text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: 0.2s; }
-        .social-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .social-btn {
+            display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 12px;
+            border: 1px solid var(--border); background: var(--canvas); color: var(--navy); text-decoration: none;
+            font-size: 0.86rem; font-weight: 600; transition: 0.2s;
+        }
+        .social-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
         .wa-full { background: var(--accent); color: #fff !important; border-color: var(--accent); }
-        .wa-full:hover { background: var(--accent-hover); }
+        .wa-full:hover { filter: brightness(1.1); }
 
         .form-group { display: flex; flex-direction: column; gap: 12px; }
-        .form-input { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px; font-size: 0.9rem; background: var(--canvas); color: var(--navy); font-family: inherit; transition: 0.2s; }
+        .form-input {
+            width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+            font-size: 0.9rem; background: var(--canvas); color: var(--navy); font-family: inherit; transition: 0.2s;
+        }
         .form-input:focus { outline: none; border-color: var(--accent); }
-        textarea.form-input { resize: vertical; min-height: 100px; }
+        textarea.form-input { resize: vertical; min-height: 110px; }
+        /* Honeypot field anti-bot (disembunyikan dari manusia) */
+        .hp-field { position: absolute; left: -9999px; }
 
-        /* ---------------------------------------------------------
-           6. MODALS (Upload & Video Lightbox)
-        --------------------------------------------------------- */
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; opacity: 0; transition: opacity 0.3s ease;}
-        .modal.show { opacity: 1; display: flex; }
-        
-        .modal-box { background: var(--card); width: 100%; max-width: 440px; padding: 30px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border); transform: scale(0.95); transition: transform 0.3s ease;}
-        .modal.show .modal-box { transform: scale(1); }
-        
-        .modal-box h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--navy); }
-        .modal-box p { font-size: 0.85rem; color: var(--slate); margin-bottom: 20px; }
-        .modal-input { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; margin-bottom: 14px; outline: none; background: var(--canvas); color: var(--navy); }
+        /* Slide-over Drawer (Project Deep Dive) */
+        .drawer-overlay {
+            position: fixed; inset: 0; background: rgba(5,7,12,0.6); backdrop-filter: blur(6px);
+            z-index: 20000; opacity: 0; pointer-events: none; transition: 0.3s ease;
+        }
+        .drawer-overlay.open { opacity: 1; pointer-events: auto; }
+        .drawer {
+            position: fixed; top: 0; right: 0; bottom: 0; width: 100%; max-width: 520px;
+            background: var(--card); border-left: 1px solid var(--border); z-index: 20001;
+            padding: 36px 30px; overflow-y: auto; transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+        }
+        .drawer-overlay.open .drawer { transform: translateX(0); }
+        .drawer-close { background: none; border: 1px solid var(--border); border-radius: 50%; width: 34px; height: 34px; cursor: pointer; color: var(--navy); float: right; font-size: 1.2rem; }
+
+        /* Modal Upload */
+        .modal {
+            position: fixed; inset: 0; background: rgba(5,7,12,0.65); backdrop-filter: blur(6px);
+            display: none; align-items: center; justify-content: center; z-index: 30000; padding: 20px;
+        }
+        .modal.show { display: flex; }
+        .modal-box {
+            background: var(--card); width: 100%; max-width: 440px; padding: 28px; border-radius: 18px;
+            box-shadow: var(--shadow-lift); border: 1px solid var(--border);
+        }
+        .modal-box h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; }
+        .modal-box p { font-size: 0.85rem; color: var(--slate); margin-bottom: 18px; }
+        .modal-input {
+            width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px;
+            font-size: 0.88rem; margin-bottom: 12px; outline: none; background: var(--canvas); color: var(--navy);
+        }
         .modal-input:focus { border-color: var(--accent); }
-        .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 6px; }
-        
-        .btn-cancel { background: var(--canvas); color: var(--slate); border: 1px solid var(--border); padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
-        .btn-cancel:hover { background: var(--border); }
-        .btn-confirm { background: var(--accent); color: #fff; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
-        .btn-confirm:hover { background: var(--accent-hover); }
+        .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px; }
+        .btn-cancel { background: var(--canvas); color: var(--slate); border: 1px solid var(--border); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        .btn-confirm { background: var(--accent); color: #fff; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; }
 
-        /* Video Lightbox Specific */
-        .video-modal-box { max-width: 800px; padding: 10px; background: transparent; border: none; box-shadow: none; position: relative;}
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; background: #000; border: 1px solid var(--border); box-shadow: var(--shadow-lift);}
-        .video-container iframe, .video-container video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .close-video { position: absolute; top: -40px; right: 0; background: rgba(255,255,255,0.2); color: #fff; border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 1.2rem; cursor: pointer; transition: 0.2s;}
-        .close-video:hover { background: rgba(255,255,255,0.5); }
+        /* Floating Back To Top */
+        .btn-to-top {
+            position: fixed; bottom: 26px; right: 26px; background: var(--card); border: 1px solid var(--border);
+            color: var(--navy); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; box-shadow: var(--shadow-lift); cursor: pointer; z-index: 1000; opacity: 0;
+            visibility: hidden; transition: 0.3s; transform: translateY(15px);
+        }
+        .btn-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        .btn-to-top:hover { border-color: var(--cyan); color: var(--cyan); }
 
-        footer { border-top: 1px solid var(--border); padding: 30px 24px; text-align: center; font-size: 0.85rem; color: var(--slate); background: var(--card); margin-top: 40px; transition: 0.3s; }
+        footer { border-top: 1px solid var(--border); padding: 30px 20px; text-align: center; font-size: 0.85rem; color: var(--slate); background: var(--card); margin-top: 40px; }
 
-        /* ---------------------------------------------------------
-           7. RESPONSIVITAS MOBILE
-        --------------------------------------------------------- */
+        /* Responsif */
         @media (max-width: 900px) {
             .hero { flex-direction: column; text-align: center; }
-            .card-featured, .card-role, .card-career, .card-edu, .card-skills, .card-contact { grid-column: span 12; }
-            .card-contact { grid-template-columns: 1fr; gap: 20px; }
-            h1 { font-size: 1.9rem; }
-            .action-buttons { justify-content: center; }
+            .card-featured, .card-hud, .card-role, .card-career, .card-skills, .card-contact { grid-column: span 12; }
+            .card-contact { grid-template-columns: 1fr; gap: 24px; }
+            h1 { font-size: 1.95rem; }
+            .btn-launch-group { justify-content: center; }
         }
         @media (max-width: 640px) {
             .nav-toggle { display: block; }
-            .links { display: none; position: absolute; top: 110%; left: 0; right: 0; background: var(--card); flex-direction: column; align-items: stretch; padding: 16px 20px; gap: 12px; border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-lift); }
+            .links {
+                display: none; position: absolute; top: 110%; left: 0; right: 0; background: var(--card);
+                flex-direction: column; align-items: stretch; padding: 16px; gap: 10px;
+                border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-lift);
+            }
             .links.active { display: flex; }
-            .links a { padding: 10px 0; border-bottom: 1px solid var(--canvas); font-size: 0.92rem; text-align: center; }
-            .btn-nav { text-align: center; padding: 12px !important; margin-top: 4px; justify-content: center;}
-            header { padding: 0 12px; top: 10px; }
-            .container { padding: 0 16px; margin-top: 20px; }
-            .card { padding: 22px; }
+            .links a { padding: 10px 0; border-bottom: 1px solid var(--border); text-align: center; }
+            .btn-nav { text-align: center; padding: 12px; justify-content: center; }
+            .container { padding: 0 14px; margin-top: 15px; }
+            .feed-header { flex-direction: column; align-items: stretch; }
+            .filter-tabs { display: grid; grid-template-columns: 1fr 1fr 1fr; text-align: center; }
         }
     </style>
 </head>
 
-<body class="animate-fade">
+<body>
+
+    <div id="scroll-progress"></div>
+    <!-- Objek 3D Latar Belakang -->
+    <div class="cyber-cube" id="cube1"></div>
+    <div class="cyber-cube left-side" id="cube2"></div>
+
+    <div class="custom-cursor" id="customCursor"></div>
 
     <header>
         <nav>
-            <div class="brand">
+            <div class="brand" onclick="window.scrollTo(0,0)">
                 <span>VALENTINO WULLUR</span>
                 <span class="badge">MDP &bull; KBRU PALU</span>
             </div>
             
             <div class="links" id="navLinks">
-                <a href="#about" onclick="closeNav()">Tentang</a>
-                <a href="#experience" onclick="closeNav()">Pengalaman</a>
-                <a href="#feed" onclick="closeNav()">Sorotan</a>
-                <a href="#contact" class="btn-nav" onclick="closeNav()">Hubungi Saya</a>
+                <a href="#about" onclick="closeNav()" data-i18n="nav_about">Tentang</a>
+                <a href="#experience" onclick="closeNav()" data-i18n="nav_exp">Portofolio</a>
+                <a href="#feedSection" onclick="closeNav()" data-i18n="nav_db">Database</a>
+                <a href="#contact" class="btn-nav" onclick="closeNav()" data-i18n="nav_contact">Hubungi Saya</a>
             </div>
 
-            <div style="display: flex; gap: 10px; align-items: center;">
-                <button class="btn-theme" id="themeToggle" title="Ganti Tema">
-                    <svg id="moonIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                    <svg id="sunIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <div class="nav-controls">
+                <!-- Bilingual Switcher Button -->
+                <button class="btn-icon-switch" id="langToggle" title="Ganti Bahasa">EN</button>
+                <!-- Theme Mode Button -->
+                <button class="btn-icon-switch" id="themeToggle" title="Ganti Tema">
+                    <svg id="moonIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <svg id="sunIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                 </button>
                 <button class="nav-toggle" id="menuToggle" aria-label="Buka Menu">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
@@ -273,59 +436,75 @@
         <section class="hero" id="about">
             <div class="hero-img-box">
                 <img id="userAvatar" src="valen-image.png" alt="Valentino Alexandro Wullur" class="avatar" onerror="this.src='https://ui-avatars.com/api/?name=Valentino+Alexandro&background=2563eb&color=fff&size=200'">
-                <button class="btn-edit" onclick="openUploadModal()" title="Upload Konten/Profil Baru">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <button class="btn-edit" onclick="openUploadModal()" title="Upload Konten Baru">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                 </button>
             </div>
             <div>
-                <div class="pill"><span class="dot"></span>Staf Marketing MDP &bull; PT Kalibesar Raya Utama Cabang Palu</div>
+                <div class="pill"><span class="dot"></span><span data-i18n="hero_pill">Staf Marketing MDP &bull; PT Kalibesar Raya Utama Cabang Palu</span></div>
                 <h1>Welcome to my website — <br><span id="typing-text" class="typewriter-text">Inovasi Digital & Analitis.</span></h1>
-                <p>Lulusan Ilmu Filsafat yang menempuh jalur profesional sebagai konsultan asuransi melalui Management Development Program (MDP) di PT Kalibesar Raya Utama dan saat ini berada di cabang Palu.</p>
+                <p data-i18n="hero_desc">Lulusan Ilmu Filsafat yang menempuh jalur profesional melalui Management Development Program (MDP) di PT Kalibesar Raya Utama. Berfokus sebagai konsultan yang independen dan profesional, Inovasi Digital dan Teknologi, serta Musik dan Pelayanan Gereja.</p>
             </div>
         </section>
 
-        <!-- Grid Layout dengan class 'reveal' untuk animasi saat scroll -->
+        <!-- Bento Grid -->
         <section class="bento-grid" id="experience">
             
-            <!-- Highlight Card dengan 3D Tilt -->
-            <article class="card card-featured reveal" id="tiltCard">
+            <!-- Proyek KBRU (3D Tilt & Drawer Detail Trigger) -->
+            <article class="card card-featured" id="tiltCard">
                 <div class="card-featured-inner">
-                    <span class="tag">Proyek Terpilih &bull; Web Platform Internal</span>
-                    <h2>Portal KBRU Cabang Palu</h2>
-                    <p>Butuh Asuransi untuk melindungi aset anda atau segala kebutuhan lainnya? Silahkan kunjungi website Konsultan Asuransi KBRU cabang Palu</p>
-                    <div class="action-buttons">
-                        <a href="https://valentinoalex19.github.io/web-portofolio-kbru-palu/" target="_blank" rel="noopener noreferrer" class="btn-launch">
-                            Buka Website KBRU
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    <span class="tag" data-i18n="proj_tag">Proyek Terpilih &bull; Web Platform Internal</span>
+                    <h2 data-i18n="proj_title">Website KBRU Cabang Palu</h2>
+                    <p data-i18n="proj_desc">Aplikasi web interaktif terstruktur yang informatif serta mempermudah menjawab dan mengupayakan kebutuhan-kebutuhan asuransi dari nasabah melalui kantor cabang Palu.</p>
+                    <div class="btn-launch-group">
+                        <a href="https://valentinoalex19.github.io/web-portofolio-kbru-palu/" target="_blank" rel="noopener noreferrer" class="btn-action btn-primary" data-i18n="btn_launch">
+                            Buka Web KBRU
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                         </a>
-                        <button onclick="openVideoModal()" class="btn-launch btn-secondary">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            Tonton Video Demo
+                        <button onclick="toggleDrawer(true)" class="btn-action btn-secondary" data-i18n="btn_deepdive">
+                            Bedah Arsitektur Web
                         </button>
                     </div>
                 </div>
             </article>
 
-            <!-- Role Card -->
-            <article class="card card-role reveal" style="transition-delay: 0.1s;">
+            <!-- Status HUD: Waktu Palu & Cuaca Real-Time (Open-Meteo API) -->
+            <article class="card card-hud">
                 <div>
-                    <span class="role-period">Oktober 2024 &mdash; Sekarang</span>
-                    <h3>Staf Marketing (Lulusan MDP)</h3>
-                    <p>PT Kalibesar Raya Utama &mdash; Cabang Palu. Bertanggung jawab atas perluasan relasi korporasi, analisa polis properti & kendaraan, serta mendampingi nasabah sebagai konsultan pialang independen.</p>
+                    <span class="tag">Palu Regional Monitor</span>
+                    <h3 style="font-size: 1.1rem; font-weight: 700;" data-i18n="hud_title">Kondisi Lapangan Terkini</h3>
                 </div>
-                <div class="role-highlight">Lulusan Management Development Program (MDP) KBRU</div>
+                <div class="hud-grid">
+                    <div class="hud-box">
+                        <div class="hud-label">WITA Time (Palu)</div>
+                        <div class="hud-value" id="localTime">00:00</div>
+                    </div>
+                    <div class="hud-box">
+                        <div class="hud-label">Suhu Udara</div>
+                        <div class="hud-value" id="localTemp">--°C</div>
+                        <div class="weather-badge" id="weatherDesc">Memuat Satelit...</div>
+                    </div>
+                </div>
             </article>
 
-            <!-- Career Timeline -->
-            <article class="card card-career reveal" style="transition-delay: 0.2s;">
-                <h3>Riwayat Pengalaman Profesional</h3>
+            <!-- Jabatan MDP -->
+            <article class="card card-role">
+                <span class="role-period" data-i18n="role_period">Oktober 2024 &mdash; Sekarang</span>
+                <h3 data-i18n="role_title">Staf Marketing (Lulusan MDP)</h3>
+                <p data-i18n="role_desc">PT Kalibesar Raya Utama &mdash; Cabang Palu. Bertanggung jawab atas perluasan relasi korporasi, analisa polis properti & kendaraan, serta mendampingi nasabah sebagai konsultan pialang independen.</p>
+                <div class="role-highlight" data-i18n="role_badge">Lulusan Management Development Program (MDP) KBRU</div>
+            </article>
+
+            <!-- Riwayat Karir -->
+            <article class="card card-career">
+                <h3 data-i18n="career_title">Riwayat Pengalaman Profesional</h3>
                 <div class="timeline">
                     <div class="t-title">Staf Marketing (MDP Graduate) &mdash; PT Kalibesar Raya Utama</div>
                     <div class="t-time">Oktober 2024 &mdash; Sekarang | Palu, Sulawesi Tengah</div>
-                    <div class="desc">Mengembangkan hubungan kemitraan nasabah, penataan RFQ penawaran premi, audit klausul polis, dan perancangan web kalkulasi tarif berbasis acuan OJK.</div>
+                    <div class="desc" data-i18n="career_desc1">Mengembangkan kemitraan nasabah korporat, penataan RFQ premi, audit klausul polis, dan kalkulasi tarif berbasis OJK.</div>
                 </div>
                 <div class="timeline">
-                    <div class="t-title">Data Administration & Customer Service &mdash; Gereja Katolik Bunda Hati Kudus</div>
+                    <div class="t-title">Data Administration & Customer Service &mdash; Paroki Bunda Hati Kudus</div>
                     <div class="t-time">Maret 2023 &mdash; 2024 | Jakarta Pusat, DKI Jakarta</div>
                 </div>
                 <div class="timeline">
@@ -334,51 +513,49 @@
                 </div>
             </article>
 
-            <!-- Skills Card -->
-            <article class="card card-skills reveal" style="transition-delay: 0.3s;">
-                <div>
-                    <h3>Domain Keahlian Utama</h3>
-                    <p style="font-size: 0.88rem; color: var(--slate); line-height: 1.55;">Perpaduan pemikiran kritis filosofis, underwriting pialang asuransi, dan kemampuan rekayasa web.</p>
-                </div>
+            <!-- Keahlian -->
+            <article class="card card-skills">
+                <h3 data-i18n="skills_title">Domain Keahlian Utama</h3>
+                <p data-i18n="skills_desc">Perpaduan pemikiran kritis filosofis, underwriting pialang asuransi, dan rancang bangun arsitektur web.</p>
                 <div class="pill-group">
                     <span class="skill-pill">Insurance Broking</span>
                     <span class="skill-pill">Property All Risk (PAR)</span>
                     <span class="skill-pill">Motor Vehicle (MV)</span>
                     <span class="skill-pill">SEOJK Compliance</span>
-                    <span class="skill-pill">HTML5, CSS & JS</span>
+                    <span class="skill-pill">Cloud Database Integration</span>
+                    <span class="skill-pill">Web Front-End Engine</span>
                 </div>
             </article>
 
-            <!-- ============================================== -->
-            <!-- WIDGET DUAL FEED (Menampilkan efek Skeleton saat loading)  -->
-            <!-- ============================================== -->
-            <article class="card card-feed reveal" id="feed" style="transition-delay: 0.4s;">
-                <h3>🚀 Proyek & Sertifikasi Terbaru</h3>
-                <p style="font-size: 0.85rem; color: var(--slate); margin-top:-8px;">Sorotan karya, portofolio sistem, dan sertifikasi keahlian ter-update.</p>
-                <div class="feed-grid" id="proyekContainer">
-                    <!-- Skeleton Loader -->
-                    <div class="feed-item skeleton" style="border:none;"><div class="feed-media"></div><div class="feed-desc">Loading...</div></div>
-                    <div class="feed-item skeleton" style="border:none;"><div class="feed-media"></div><div class="feed-desc">Loading...</div></div>
+            <!-- Combined Feed dengan Pencarian Real-Time -->
+            <article class="card card-feed" id="feedSection">
+                <div class="feed-header">
+                    <div>
+                        <h3 data-i18n="feed_title">Pusat Data Proyek & Catatan Harian</h3>
+                        <p style="font-size: 0.85rem; color: var(--slate);" data-i18n="feed_sub">Tersinkronisasi otomatis dengan Google Drive Cloud Storage.</p>
+                    </div>
+                    <div class="feed-search-wrap">
+                        <input type="text" id="feedSearch" class="search-input" placeholder="Cari dokumen, sertifikat, atau catatan..." onkeyup="filterSearch()" data-i18n-ph="search_ph">
+                    </div>
+                    <div class="filter-tabs">
+                        <button class="filter-btn active" onclick="filterCategory('all', this)" data-i18n="tab_all">Semua</button>
+                        <button class="filter-btn" onclick="filterCategory('proyek', this)" data-i18n="tab_proj">Proyek</button>
+                        <button class="filter-btn" onclick="filterCategory('pengalaman', this)" data-i18n="tab_daily">Harian</button>
+                    </div>
+                </div>
+
+                <div class="feed-grid" id="combinedContainer">
+                    <div class="feed-item skeleton"><div class="feed-media"></div><div class="feed-desc">Loading...</div></div>
+                    <div class="feed-item skeleton"><div class="feed-media"></div><div class="feed-desc">Loading...</div></div>
+                    <div class="feed-item skeleton"><div class="feed-media"></div><div class="feed-desc">Loading...</div></div>
                 </div>
             </article>
 
-            <article class="card card-feed reveal" style="transition-delay: 0.5s;">
-                <h3>📝 Catatan Pengalaman Harian</h3>
-                <p style="font-size: 0.85rem; color: var(--slate); margin-top:-8px;">Dokumentasi lapangan, aktivitas profesional, dan pembaruan kegiatan harian.</p>
-                <div class="feed-grid" id="pengalamanContainer">
-                     <!-- Skeleton Loader -->
-                     <div class="feed-item skeleton" style="border:none;"><div class="feed-media"></div><div class="feed-desc">Loading...</div></div>
-                     <div class="feed-item skeleton" style="border:none;"><div class="feed-media"></div><div class="feed-desc">Loading...</div></div>
-                </div>
-            </article>
-
-            <!-- ============================================== -->
-            <!-- FORMULIR KONTAK TERINTEGRASI -->
-            <!-- ============================================== -->
-            <article class="card card-contact reveal" id="contact" style="transition-delay: 0.6s;">
+            <!-- Formulir Kontak Terintegrasi (dengan Anti-Spam Honeypot) -->
+            <article class="card card-contact" id="contact">
                 <div class="contact-info">
-                    <h3>Mari Berkolaborasi!</h3>
-                    <p>Mencari solusi asuransi yang tepat untuk korporasi Anda, atau ingin mendiskusikan peluang kerja sama? Silakan kirimkan pesan langsung kepada saya melalui form, atau hubungi saluran di bawah ini.</p>
+                    <h3 data-i18n="contact_title">Mari Berkolaborasi!</h3>
+                    <p data-i18n="contact_desc">Mencari solusi asuransi yang tepat untuk korporasi Anda, atau ingin mendiskusikan peluang kerja sama? Silakan kirimkan pesan langsung melalui formulir ini.</p>
                     <div class="social-grid">
                         <a href="https://wa.me/6285757875464" target="_blank" class="social-btn wa-full">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
@@ -392,60 +569,65 @@
                 </div>
                 <div class="contact-form">
                     <form id="contactForm" class="form-group" onsubmit="submitContactForm(event)">
-                        <input type="text" id="contactName" class="form-input" placeholder="Nama Lengkap atau Perusahaan" required>
-                        <input type="email" id="contactEmail" class="form-input" placeholder="Alamat Email Anda" required>
-                        <textarea id="contactMessage" class="form-input" placeholder="Tuliskan pesan, tujuan kolaborasi, atau pertanyaan Anda di sini..." required></textarea>
-                        <button type="submit" id="btnContactSubmit" class="btn-nav" style="justify-content: center; padding: 12px; width: 100%;">Kirim Pesan Sekarang</button>
+                        <!-- Honeypot trap anti bot -->
+                        <input type="text" id="contactWebsiteTrap" class="hp-field" tabindex="-1" autocomplete="off">
+                        
+                        <input type="text" id="contactName" class="form-input" placeholder="Nama Lengkap atau Perusahaan" required data-i18n-ph="ph_name">
+                        <input type="email" id="contactEmail" class="form-input" placeholder="Alamat Email Anda" required data-i18n-ph="ph_email">
+                        <textarea id="contactMessage" class="form-input" placeholder="Tuliskan pesan, tujuan kolaborasi, atau pertanyaan Anda..." required data-i18n-ph="ph_msg"></textarea>
+                        <button type="submit" id="btnContactSubmit" class="btn-nav" style="justify-content: center; padding: 12px; width: 100%;" data-i18n="btn_send">Kirim Pesan Sekarang</button>
                     </form>
                 </div>
             </article>
         </section>
     </main>
 
-    <!-- ============================================== -->
-    <!-- MODAL 1: MULTI-UPLOAD (PROFIL, PROYEK, PENGALAMAN)-->
-    <!-- ============================================== -->
+    <!-- Slide-over Drawer (Bedah Arsitektur Proyek KBRU) -->
+    <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer(false)">
+        <div class="drawer" onclick="event.stopPropagation()">
+            <button class="drawer-close" onclick="toggleDrawer(false)">&times;</button>
+            <span class="tag" style="margin-top: 10px;">Architecture Breakdown</span>
+            <h2 style="font-size: 1.5rem; margin: 8px 0 14px;">Web Portal & Kalkulator Premi KBRU</h2>
+            <p style="color:var(--slate); font-size: 0.9rem; margin-bottom: 20px;">
+                Platform independen yang didesain untuk mempercepat kalkulasi premi asuransi kendaraan dan properti sesuai pedoman tarif Surat Edaran OJK (SEOJK).
+            </p>
+
+            <h4 style="font-size: 0.95rem; margin-bottom: 8px;">Spesifikasi Mesin Web:</h4>
+            <ul style="color:var(--slate); font-size: 0.88rem; padding-left: 20px; line-height: 1.8; margin-bottom: 24px;">
+                <li><strong>Dynamic Rate Matrix:</strong> Kalkulasi otomatis kombinasi zona wilayah dan nilai pertanggungan.</li>
+                <li><strong>Vanilla Engine:</strong> 100% Native JavaScript tanpa dependensi eksternal, memastikan performa ultra-ringan.</li>
+                <li><strong>SEOJK Strict Alignment:</strong> Memastikan batas tarif bawah dan atas sesuai regulasi pengawasan.</li>
+            </ul>
+
+            <a href="https://valentinoalex19.github.io/web-portofolio-kbru-palu/" target="_blank" class="btn-action btn-primary" style="width: 100%; justify-content: center;">
+                Buka Platform Asli
+            </a>
+        </div>
+    </div>
+
+    <!-- Modal Multi-Upload -->
     <div id="uploadModal" class="modal">
         <div class="modal-box">
-            <h3>Upload Konten Baru</h3>
-            <p>Pilih kategori tujuan upload ke database Google Drive Anda.</p>
-            
+            <h3 data-i18n="modal_title">Upload Konten Baru</h3>
+            <p data-i18n="modal_sub">Pilih kategori tujuan upload ke Google Drive.</p>
             <input type="password" id="ownerPassword" class="modal-input" placeholder="Masukkan Sandi Pemilik">
-            
             <select id="uploadCategory" class="modal-input" onchange="toggleDescriptionField()">
                 <option value="profil">1. Ubah Foto Profil Utama</option>
                 <option value="proyek">2. Tambah Proyek / Sertifikasi</option>
                 <option value="pengalaman">3. Tambah Pengalaman Harian</option>
             </select>
-            
             <input type="text" id="uploadDescription" class="modal-input" placeholder="Tulis Keterangan Singkat / Judul File..." style="display: none;">
             <input type="file" id="imageFileInput" class="modal-input" accept="image/*,application/pdf">
-            
             <div class="modal-actions">
-                <button class="btn-cancel" onclick="closeModal('uploadModal')">Batal</button>
-                <button class="btn-confirm" id="uploadBtn" onclick="uploadContent()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                    Upload Sekarang
-                </button>
+                <button class="btn-cancel" onclick="closeUploadModal()" data-i18n="btn_cancel">Batal</button>
+                <button class="btn-confirm" id="uploadBtn" onclick="uploadContent()">Upload Sekarang</button>
             </div>
         </div>
     </div>
 
-    <!-- ============================================== -->
-    <!-- MODAL 2: VIDEO DEMO LIGHTBOX -->
-    <!-- ============================================== -->
-    <div id="videoModal" class="modal">
-        <div class="modal-box video-modal-box">
-            <button class="close-video" onclick="closeModal('videoModal')">&times;</button>
-            <div class="video-container" id="videoWrapper">
-                <!-- Video/Iframe Placeholder. Jika Anda punya URL YouTube, ganti tag div ini dengan iframe -->
-                <div style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#18181b; color:#a1a1aa; flex-direction:column; gap:10px;">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                    <p>Video Demo Segera Hadir.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <button class="btn-to-top" id="btnToTop" onclick="window.scrollTo(0,0)" title="Kembali ke Atas">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
 
     <footer>
         <p>&copy; 2026 Valentino Alexandro Wullur, S.Fil. &bull; PT Kalibesar Raya Utama Cabang Palu. Terdaftar & Diawasi oleh Otoritas Jasa Keuangan (OJK).</p>
@@ -453,24 +635,97 @@
 
     <script>
         // =========================================================================
-        // GANTI DENGAN URL WEB APP GOOGLE APPS SCRIPT ANDA DI BAWAH INI:
+        // MASUKKAN URL GOOGLE APPS SCRIPT ANDA DI SINI
         // =========================================================================
         const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynS4bSMHE22xOYtqq1dulKz7UQ19Wk8Y5MGQby3ZWz8OEC5ryXWqD8mVcurYL9MdGWBw/exec";
 
-        /* --- 1. DARK MODE TOGGLE --- */
+        /* --- 1. SISTEM BILINGUAL (ID / EN) --- */
+        const i18n = {
+            id: {
+                nav_about: "Tentang", nav_exp: "Portofolio", nav_db: "Database", nav_contact: "Hubungi Saya",
+                hero_pill: "Staf Marketing MDP • PT Kalibesar Raya Utama Cabang Palu",
+                hero_desc: "Lulusan Ilmu Filsafat yang menempuh jalur profesional melalui Management Development Program (MDP) di PT Kalibesar Raya Utama. Berfokus sebagai konsultan yang independen dan profesional, Inovasi Digital dan Teknologi, serta Musik dan Pelayanan Gereja.",
+                proj_tag: "Proyek Terpilih • Web Platform Internal",
+                proj_title: "Website KBRU cabang Palu",
+                proj_desc: "Aplikasi web interaktif terstruktur yang informatif serta mempermudah menjawab dan mengupayakan kebutuhan-kebutuhan asuransi dari nasabah melalui kantor cabang Palu.",
+                btn_launch: "Buka Web KBRU", btn_deepdive: "Bedah Arsitektur Web",
+                hud_title: "Kondisi Lapangan Terkini",
+                role_period: "Oktober 2024 — Sekarang", role_title: "Staf Marketing (Lulusan MDP)",
+                role_desc: "PT Kalibesar Raya Utama — Cabang Palu. Bertanggung jawab atas perluasan relasi korporasi, analisa polis properti & kendaraan, serta mendampingi nasabah sebagai konsultan pialang independen.",
+                role_badge: "Lulusan Management Development Program (MDP) KBRU",
+                career_title: "Riwayat Pengalaman Profesional",
+                career_desc1: "Mengembangkan kemitraan nasabah korporat, penataan RFQ premi, audit klausul polis, dan kalkulasi tarif berbasis OJK.",
+                skills_title: "Domain Keahlian Utama",
+                skills_desc: "Perpaduan pemikiran kritis filosofis, underwriting pialang asuransi, dan rancang bangun arsitektur web.",
+                feed_title: "Pusat Data Proyek & Catatan Harian",
+                feed_sub: "Tersinkronisasi otomatis dengan Google Drive Cloud Storage.",
+                search_ph: "Cari dokumen, sertifikat, atau catatan...",
+                tab_all: "Semua", tab_proj: "Proyek", tab_daily: "Harian",
+                contact_title: "Mari Berkolaborasi!",
+                contact_desc: "Mencari solusi asuransi yang tepat untuk korporasi Anda, atau ingin mendiskusikan peluang kerja sama? Silakan kirimkan pesan langsung melalui formulir ini.",
+                ph_name: "Nama Lengkap atau Perusahaan", ph_email: "Alamat Email Anda", ph_msg: "Tuliskan pesan, tujuan kolaborasi, atau pertanyaan Anda...",
+                btn_send: "Kirim Pesan Sekarang", modal_title: "Upload Konten Baru", modal_sub: "Pilih kategori tujuan upload ke Google Drive.", btn_cancel: "Batal"
+            },
+            en: {
+                nav_about: "About", nav_exp: "Portfolio", nav_db: "Database", nav_contact: "Contact Me",
+                hero_pill: "MDP Marketing Staff • PT Kalibesar Raya Utama Palu Branch",
+                hero_desc: "Philosophy graduate excelling in the corporate broking domain via the Management Development Program (MDP) at PT Kalibesar Raya Utama. Specializing in risk mitigation, client advocacy, and insurance web calculators.",
+                proj_tag: "Featured Project • Internal Web Platform",
+                proj_title: "KBRU Palu Portal & Premium Calculator",
+                proj_desc: "Structured interactive web application for branch insights and accurate OJK-compliant premium simulations across PAR and Motor Vehicle lines.",
+                btn_launch: "Launch Platform", btn_deepdive: "Architecture Breakdown",
+                hud_title: "Regional Live Telemetry",
+                role_period: "October 2024 — Present", role_title: "Marketing Staff (MDP Graduate)",
+                role_desc: "PT Kalibesar Raya Utama — Palu Branch. Expanding corporate partnerships, analyzing property & vehicle policies, and providing independent insurance advisory.",
+                role_badge: "Management Development Program (MDP) Graduate",
+                career_title: "Professional Career Timeline",
+                career_desc1: "Managing client relations, structuring RFQ quotes, policy audits, and developing web-based rate calculators.",
+                skills_title: "Core Domain Capabilities",
+                skills_desc: "Merging critical philosophical reasoning with precision insurance underwriting and web engineering.",
+                feed_title: "Project Data Hub & Daily Logs",
+                feed_sub: "Directly synchronized with Google Drive Cloud Storage.",
+                search_ph: "Search files, certificates, or logs...",
+                tab_all: "All", tab_proj: "Projects", tab_daily: "Logs",
+                contact_title: "Let's Collaborate!",
+                contact_desc: "Seeking insurance solutions for your enterprise or looking to partner up? Drop me a direct message via this form.",
+                ph_name: "Full Name or Company", ph_email: "Your Email Address", ph_msg: "Write your message, partnership inquiry, or question...",
+                btn_send: "Send Inquiry Now", modal_title: "Upload New Content", modal_sub: "Select target cloud directory in Google Drive.", btn_cancel: "Cancel"
+            }
+        };
+
+        let currentLang = localStorage.getItem('site_lang') || 'id';
+
+        function updateLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('site_lang', lang);
+            document.getElementById('langToggle').innerText = lang === 'id' ? 'EN' : 'ID';
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
+            });
+
+            document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+                const key = el.getAttribute('data-i18n-ph');
+                if (i18n[lang][key]) el.setAttribute('placeholder', i18n[lang][key]);
+            });
+        }
+
+        document.getElementById('langToggle').addEventListener('click', () => {
+            updateLanguage(currentLang === 'id' ? 'en' : 'id');
+        });
+
+        /* --- 2. DARK MODE --- */
         const themeToggle = document.getElementById('themeToggle');
         const moonIcon = document.getElementById('moonIcon');
         const sunIcon = document.getElementById('sunIcon');
         
         if (localStorage.getItem('theme') === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
-            moonIcon.style.display = 'none';
-            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none'; sunIcon.style.display = 'block';
         }
-
         themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
+            if (document.documentElement.getAttribute('data-theme') === 'dark') {
                 document.documentElement.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'light');
                 moonIcon.style.display = 'block'; sunIcon.style.display = 'none';
@@ -481,178 +736,259 @@
             }
         });
 
-        /* --- 2. MOBILE MENU --- */
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        menuToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); });
-        function closeNav() { navLinks.classList.remove('active'); }
+        /* --- 3. CUSTOM CURSOR & SCROLL PROGRESS --- */
+        const cursor = document.getElementById('customCursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
+        });
+        document.querySelectorAll('a, button, input, select, textarea, .card').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
 
-        /* --- 3. ANIMASI SCROLL REVEAL (Intersection Observer) --- */
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting){
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target); // Animasi hanya terjadi sekali
+        window.addEventListener('scroll', () => {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById('scroll-progress').style.width = ((winScroll / height) * 100) + "%";
+            
+            const btnToTop = document.getElementById('btnToTop');
+            if (winScroll > 350) btnToTop.classList.add('show');
+            else btnToTop.classList.remove('show');
+
+            // --- SCROLL-DRIVEN 3D ANIMATION ---
+            const scrolled = window.pageYOffset;
+            
+            // 1. Memutar Objek Latar Belakang Geometris
+            const cube1 = document.getElementById('cube1');
+            const cube2 = document.getElementById('cube2');
+            if (cube1) cube1.style.transform = `translateY(${-scrolled * 0.15}px) perspective(800px) rotateX(${scrolled * 0.1}deg) rotateY(${scrolled * 0.15}deg)`;
+            if (cube2) cube2.style.transform = `translateY(${-scrolled * 0.08}px) perspective(600px) rotateX(${scrolled * 0.15}deg) rotateZ(${scrolled * 0.05}deg)`;
+
+            // 2. Efek Tekuk (Pitch) 3D pada Kartu Bento Saat Di-scroll
+            document.querySelectorAll('.card:not(.card-featured)').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const cardCenter = rect.top + (rect.height / 2);
+                const viewCenter = window.innerHeight / 2;
+                
+                // Menghitung jarak kartu dari tengah layar
+                const distance = cardCenter - viewCenter;
+                
+                // Memiringkan kartu maksimal 8 derajat secara dinamis
+                let rotateX = (distance / viewCenter) * -8; 
+                
+                // Eksekusi hanya jika elemen berada di dalam jangkauan layar
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    card.style.transform = `perspective(1200px) rotateX(${rotateX}deg)`;
                 }
             });
-        }, { threshold: 0.1 });
-        revealElements.forEach(el => revealObserver.observe(el));
+        });
 
-        /* --- 4. ANIMASI TEKS MESIN KETIK (Typing Effect) --- */
-        const typingText = document.getElementById('typing-text');
-        const phrases = ["Curiosity, Analitis, dan Inovatif.", "Konsultan Pialang Independen.", "Musik dan Pelayanan Gereja."];
-        let phraseIndex = 0; let letterIndex = 0; let isDeleting = false;
-
-        function typeLoop() {
-            const currentPhrase = phrases[phraseIndex];
-            if(isDeleting) {
-                typingText.innerText = currentPhrase.substring(0, letterIndex - 1);
-                letterIndex--;
-            } else {
-                typingText.innerText = currentPhrase.substring(0, letterIndex + 1);
-                letterIndex++;
-            }
-            
-            let typingSpeed = isDeleting ? 50 : 100;
-            
-            if(!isDeleting && letterIndex === currentPhrase.length) {
-                typingSpeed = 2500; // Pause sebelum hapus
-                isDeleting = true;
-            } else if(isDeleting && letterIndex === 0) {
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-                typingSpeed = 500; // Pause sebelum ngetik kata baru
-            }
-            setTimeout(typeLoop, typingSpeed);
+        /* --- 4. HUD: WITA TIME & LIVE WEATHER PALU --- */
+        function updateTime() {
+            const formatter = new Intl.DateTimeFormat('id-ID', {
+                timeZone: 'Asia/Makassar', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+            });
+            document.getElementById('localTime').innerText = formatter.format(new Date()).replace(/\./g, ':');
         }
-        setTimeout(typeLoop, 1500); // Mulai setelah animasi halaman selesai
+        setInterval(updateTime, 1000); updateTime();
 
-        /* --- 5. EFEK 3D TILT PADA KARTU UTAMA --- */
+        // Open-Meteo API (100% Gratis Tanpa API Key untuk Palu: Lat -0.9003, Lon 119.8780)
+        function fetchPaluWeather() {
+            fetch('https://api.open-meteo.com/v1/forecast?latitude=-0.9003&longitude=119.8780&current=temperature_2m,weather_code')
+            .then(res => res.json())
+            .then(data => {
+                if (data && data.current) {
+                    document.getElementById('localTemp').innerText = Math.round(data.current.temperature_2m) + "°C";
+                    const code = data.current.weather_code;
+                    let desc = "Cerah Berawan";
+                    if(code === 0) desc = "Langit Cerah";
+                    else if(code >= 1 && code <= 3) desc = "Sebagian Berawan";
+                    else if(code >= 51 && code <= 65) desc = "Hujan Ringan";
+                    else if(code >= 80) desc = "Hujan Tropis";
+                    document.getElementById('weatherDesc').innerText = desc;
+                }
+            })
+            .catch(() => {
+                document.getElementById('localTemp').innerText = "31°C";
+                document.getElementById('weatherDesc').innerText = "Tropis Lembap";
+            });
+        }
+        fetchPaluWeather();
+
+        /* --- 5. 3D TILT EFFECT --- */
         const tiltCard = document.getElementById('tiltCard');
         tiltCard.addEventListener('mousemove', (e) => {
             const rect = tiltCard.getBoundingClientRect();
-            const x = e.clientX - rect.left; // x position within the element
-            const y = e.clientY - rect.top;  // y position within the element
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -5; // Max rotasi 5 derajat
-            const rotateY = ((x - centerX) / centerX) * 5;
-            
-            tiltCard.style.transform = `translateY(-6px) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+            const rotateX = ((y - (rect.height / 2)) / (rect.height / 2)) * -4;
+            const rotateY = ((x - (rect.width / 2)) / (rect.width / 2)) * 4;
+            tiltCard.style.transform = `translateY(-5px) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
         tiltCard.addEventListener('mouseleave', () => {
-            tiltCard.style.transform = `translateY(-6px) perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+            tiltCard.style.transform = `translateY(0) perspective(1000px) rotateX(0deg) rotateY(0deg)`;
         });
 
-        /* --- 6. FETCH DATA GOOGLE DRIVE (Dengan penghapusan Skeleton) --- */
-        window.addEventListener('DOMContentLoaded', fetchAllData);
+        /* --- 5.5. ANIMASI TEKS MESIN KETIK (BILINGUAL) --- */
+        const typingText = document.getElementById('typing-text');
+        let phrases = [];
+        let phraseIndex = 0; 
+        let isDeleting = true; 
+        let letterIndex = 27; // Dimulai dari panjang teks awal di HTML
+
+        function typeLoop() {
+            // Deteksi bahasa saat ini
+            if (currentLang === 'en') {
+                phrases = ["Digital Innovation & Analytics.", "Independent Insurance Broker.", "Web Architecture Design."];
+            } else {
+                phrases = ["Inovasi Digital & Teknologi.", "Konsultan Pialang Independen dan Profesional.", "Musik dan Pelayanan Gereja."];
+            }
+
+            const currentPhrase = phrases[phraseIndex];
+            if (letterIndex > currentPhrase.length) letterIndex = currentPhrase.length;
+            
+            if (isDeleting) { 
+                typingText.innerText = currentPhrase.substring(0, letterIndex - 1); 
+                letterIndex--; 
+            } else { 
+                typingText.innerText = currentPhrase.substring(0, letterIndex + 1); 
+                letterIndex++; 
+            }
+
+            let typingSpeed = isDeleting ? 40 : 80;
+
+            if (!isDeleting && letterIndex === currentPhrase.length) { 
+                typingSpeed = 2500; 
+                isDeleting = true; 
+            } else if (isDeleting && letterIndex === 0) { 
+                isDeleting = false; 
+                phraseIndex = (phraseIndex + 1) % phrases.length; 
+                typingSpeed = 500; 
+            }
+            
+            setTimeout(typeLoop, typingSpeed);
+        }
+        setTimeout(typeLoop, 2000);
+
+        /* --- 6. DRAWER SLIDE-OVER --- */
+        function toggleDrawer(open) {
+            const overlay = document.getElementById('drawerOverlay');
+            if (open) overlay.classList.add('open');
+            else overlay.classList.remove('open');
+        }
+
+        /* --- 7. FETCH CLOUD DRIVE & INSTANT SEARCH --- */
+        let feedDataCache = [];
+        window.addEventListener('DOMContentLoaded', () => {
+            updateLanguage(currentLang);
+            fetchAllData();
+        });
 
         function fetchAllData() {
             if (!APPS_SCRIPT_URL.includes("http")) return;
-            
             fetch(APPS_SCRIPT_URL, {
-                method: "POST",
-                headers: { "Content-Type": "text/plain;charset=utf-8" },
-                body: JSON.stringify({ action: "fetchData" })
+                method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "fetchData" })
             })
-            .then(res => res.json())
-            .then(data => {
+            .then(res => res.json()).then(data => {
                 if (data.status === "success") {
                     if (data.profilUrl) document.getElementById('userAvatar').src = data.profilUrl;
-                    renderFeed('proyekContainer', data.proyekList);
-                    renderFeed('pengalamanContainer', data.pengalamanList);
+                    feedDataCache = [
+                        ...(data.proyekList || []).map(x => ({ ...x, category: 'proyek', badge: 'Proyek' })),
+                        ...(data.pengalamanList || []).map(x => ({ ...x, category: 'pengalaman', badge: 'Harian' }))
+                    ];
+                    renderFeed(feedDataCache);
                 }
-            })
-            .catch(err => console.error("Gagal memuat data:", err));
+            }).catch(err => console.error("Database offline:", err));
         }
 
-        function renderFeed(containerId, list) {
-            const container = document.getElementById(containerId);
-            if (!list || list.length === 0) {
-                container.innerHTML = '<p style="font-size:0.85rem; color:var(--slate);">Belum ada data terbaru.</p>';
+        function renderFeed(items) {
+            const container = document.getElementById('combinedContainer');
+            if (!items || items.length === 0) {
+                container.innerHTML = '<p style="font-size:0.85rem; color:var(--slate);">Tidak ada berkas yang cocok.</p>';
                 return;
             }
-            container.innerHTML = list.map(item => {
+            container.innerHTML = items.map(item => {
                 const isPDF = item.type === 'application/pdf';
                 const mediaContent = isPDF 
-                    ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`
-                    : `<img src="${item.url}" alt="Lampiran" onerror="this.style.display='none'">`;
+                    ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>`
+                    : `<img src="${item.url}" alt="Attachment" onerror="this.style.display='none'">`;
                 return `
-                <a href="${item.url}" target="_blank" class="feed-item">
+                <a href="${item.url}" target="_blank" class="feed-item filter-${item.category}">
                     <div class="feed-media">${mediaContent}</div>
-                    <div class="feed-desc">${item.description || 'Lihat Dokumen / Pembaruan'}</div>
+                    <div>
+                        <span class="feed-badge">${item.badge}</span>
+                        <div class="feed-desc">${item.description || 'Lihat Dokumen / Lampiran'}</div>
+                    </div>
                 </a>`;
             }).join('');
         }
 
-        /* --- 7. MODALS LOGIC (Upload & Video) --- */
-        function openUploadModal() { 
-            const m = document.getElementById('uploadModal');
-            m.classList.add('show');
-            toggleDescriptionField(); 
-        }
-        function openVideoModal() {
-            document.getElementById('videoModal').classList.add('show');
-        }
-        function closeModal(modalId) {
-            const m = document.getElementById(modalId);
-            m.classList.remove('show');
-            if(modalId === 'uploadModal') {
-                document.getElementById('ownerPassword').value = '';
-                document.getElementById('uploadDescription').value = '';
-                document.getElementById('imageFileInput').value = '';
-            }
-        }
-        // Tutup modal jika klik di luar box
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.classList.remove('show');
-            }
+        // Live Search Filter
+        function filterSearch() {
+            const query = document.getElementById('feedSearch').value.toLowerCase();
+            const activeTab = document.querySelector('.filter-btn.active').dataset.cat || 'all';
+            const filtered = feedDataCache.filter(item => {
+                const matchQuery = (item.description || '').toLowerCase().includes(query);
+                const matchTab = (activeTab === 'all') || (item.category === activeTab);
+                return matchQuery && matchTab;
+            });
+            renderFeed(filtered);
         }
 
+        function filterCategory(cat, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('active'); b.dataset.cat = "";
+            });
+            btn.classList.add('active');
+            btn.dataset.cat = cat;
+            filterSearch();
+        }
+
+        /* --- 8. MULTI-UPLOAD MODAL --- */
+        function openUploadModal() { document.getElementById('uploadModal').classList.add('show'); toggleDescriptionField(); }
+        function closeUploadModal() { document.getElementById('uploadModal').classList.remove('show'); }
         function toggleDescriptionField() {
             const cat = document.getElementById('uploadCategory').value;
-            const descInput = document.getElementById('uploadDescription');
-            descInput.style.display = (cat === 'profil') ? 'none' : 'block';
-            if(cat === 'profil') descInput.value = '';
+            const desc = document.getElementById('uploadDescription');
+            desc.style.display = (cat === 'profil') ? 'none' : 'block';
         }
 
-        /* --- 8. UPLOAD & CONTACT FORM SUBMIT --- */
         function uploadContent() {
             const password = document.getElementById('ownerPassword').value;
             const category = document.getElementById('uploadCategory').value;
             const description = document.getElementById('uploadDescription').value;
             const fileInput = document.getElementById('imageFileInput');
             const uploadBtn = document.getElementById('uploadBtn');
-            
-            if (!password) { alert("Sandi pemilik wajib diisi!"); return; }
-            if (fileInput.files.length === 0) { alert("Pilih file terlebih dahulu!"); return; }
+
+            if (!password) return alert("Sandi pemilik wajib diisi!");
+            if (fileInput.files.length === 0) return alert("Pilih file terlebih dahulu!");
 
             const file = fileInput.files[0];
             const reader = new FileReader();
-            uploadBtn.innerHTML = "Mengunggah..."; uploadBtn.disabled = true;
+            uploadBtn.innerText = "Mengunggah..."; uploadBtn.disabled = true;
 
             reader.onload = function(e) {
-                const base64Data = e.target.result.split(',')[1];
-                const payload = { action: "upload", password: password, category: category, description: description, fileName: file.name, mimeType: file.type, base64Data: base64Data };
-
-                fetch(APPS_SCRIPT_URL, {
-                    method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload)
-                }).then(res => res.json()).then(data => {
-                    if (data.status === "success") {
-                        alert("Berkas berhasil di-upload!"); fetchAllData(); closeModal('uploadModal');
-                    } else { alert("Gagal: " + data.message); }
-                }).catch(err => alert("Terjadi kesalahan jaringan.")).finally(() => {
-                    uploadBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload Sekarang`; 
-                    uploadBtn.disabled = false;
+                const payload = {
+                    action: "upload", password, category, description,
+                    fileName: file.name, mimeType: file.type, base64Data: e.target.result.split(',')[1]
+                };
+                fetch(APPS_SCRIPT_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) })
+                .then(r => r.json()).then(res => {
+                    if (res.status === "success") {
+                        alert("File berhasil diunggah!"); fetchAllData(); closeUploadModal();
+                    } else alert("Gagal: " + res.message);
+                }).finally(() => {
+                    uploadBtn.innerText = "Upload Sekarang"; uploadBtn.disabled = false;
                 });
             };
             reader.readAsDataURL(file);
         }
 
+        /* --- 9. CONTACT FORM DENGAN HONEYPOT BOT TRAP --- */
         function submitContactForm(e) {
             e.preventDefault();
+            // Cek bot trap: jika diisi oleh bot script, batalkan diam-diam
+            if (document.getElementById('contactWebsiteTrap').value !== "") return;
+
             const btn = document.getElementById('btnContactSubmit');
             const payload = {
                 action: "contactForm",
@@ -660,18 +996,26 @@
                 email: document.getElementById('contactEmail').value,
                 message: document.getElementById('contactMessage').value
             };
-            btn.innerText = "Mengirim Pesan..."; btn.disabled = true;
 
-            fetch(APPS_SCRIPT_URL, {
-                method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload)
-            }).then(res => res.json()).then(data => {
-                if (data.status === "success") {
-                    alert("Pesan Anda telah terkirim!"); document.getElementById('contactForm').reset();
-                } else { alert("Gagal: " + data.message); }
-            }).catch(err => alert("Error jaringan.")).finally(() => {
-                btn.innerText = "Kirim Pesan Sekarang"; btn.disabled = false;
+            btn.innerText = "Mengirim..."; btn.disabled = true;
+            fetch(APPS_SCRIPT_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) })
+            .then(r => r.json()).then(res => {
+                if (res.status === "success") {
+                    alert("Pesan Anda telah berhasil terkirim!");
+                    document.getElementById('contactForm').reset();
+                } else alert("Gagal: " + res.message);
+            }).catch(() => alert("Koneksi gagal, silakan hubungi via WhatsApp."))
+            .finally(() => {
+                btn.innerText = i18n[currentLang].btn_send;
+                btn.disabled = false;
             });
         }
+
+        // Mobile Nav Toggle Helper
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+        function closeNav() { navLinks.classList.remove('active'); }
     </script>
 </body>
 </html>

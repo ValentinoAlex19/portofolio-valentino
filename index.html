@@ -5,144 +5,237 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valentino Alexandro Wullur — Professional Portfolio & Tech Builder</title>
     <style>
+        /* ---------------------------------------------------------
+           1. SKEMA WARNA & VARIABEL GLOBAL (Light & Dark Mode)
+        --------------------------------------------------------- */
         :root {
-            --canvas: #f8fafc; --card: #ffffff; --navy: #0f172a; --slate: #475569;
-            --border: #e2e8f0; --indigo: #4f46e5; --indigo-hover: #4338ca; --indigo-soft: #eef2ff;
-            --shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.04), 0 2px 4px -2px rgba(15, 23, 42, 0.03);
-            --shadow-lift: 0 16px 32px -6px rgba(79, 70, 229, 0.12); --radius: 20px;
+            /* Tema Terang (Light) - Professional Sapphire */
+            --canvas: #f4f4f5; 
+            --card: #ffffff; 
+            --navy: #18181b; 
+            --slate: #52525b;
+            --border: #e4e4e7; 
+            --accent: #2563eb; 
+            --accent-hover: #1d4ed8; 
+            --accent-soft: #eff6ff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
+            --shadow-lift: 0 16px 32px -6px rgba(37, 99, 235, 0.15); 
+            --radius: 16px;
         }
+
+        /* Tema Gelap (Dark) */
+        [data-theme="dark"] {
+            --canvas: #09090b; 
+            --card: #18181b; 
+            --navy: #fafafa; 
+            --slate: #a1a1aa;
+            --border: #27272a; 
+            --accent: #3b82f6; 
+            --accent-hover: #60a5fa; 
+            --accent-soft: rgba(59, 130, 246, 0.15);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            --shadow-lift: 0 16px 32px -6px rgba(0, 0, 0, 0.4);
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        /* Mengaktifkan transisi animasi scroll halus ke bawah */
         html { scroll-behavior: smooth; }
 
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--canvas); color: var(--navy); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: var(--canvas); 
+            color: var(--navy); 
+            line-height: 1.6; 
+            -webkit-font-smoothing: antialiased; 
+            overflow-x: hidden; 
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Animasi Masuk Global */
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fade { animation: fadeInUp 2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-fade { animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
-        /* Navigasi & Hamburger */
-        header { position: sticky; top: 20px; z-index: 1000; padding: 0 24px; display: flex; justify-content: center; }
-        nav { width: 100%; max-width: 1150px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: 9999px; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 20px rgba(0,0,0,0.04); position: relative; }
+        /* Animasi Scroll Reveal */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Animasi Skeleton Shimmer */
+        @keyframes shimmer { 0% { background-position: -1000px 0; } 100% { background-position: 1000px 0; } }
+        .skeleton { 
+            background: linear-gradient(90deg, var(--border) 25%, var(--canvas) 50%, var(--border) 75%);
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite linear;
+            border-radius: 8px;
+            color: transparent !important;
+            pointer-events: none;
+        }
+        
+        /* Animasi Teks Mesin Ketik */
+        .typewriter-text {
+            border-right: 2px solid var(--accent);
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            animation: blinkCursor 0.75s step-end infinite;
+        }
+        @keyframes blinkCursor { from, to { border-color: transparent } 50% { border-color: var(--accent); } }
+
+        /* ---------------------------------------------------------
+           2. NAVIGASI & HEADER
+        --------------------------------------------------------- */
+        header { position: sticky; top: 16px; z-index: 1000; padding: 0 24px; display: flex; justify-content: center; }
+        nav { 
+            width: 100%; max-width: 1150px; background: var(--card); border: 1px solid var(--border); 
+            border-radius: 9999px; padding: 10px 20px; display: flex; align-items: center; 
+            justify-content: space-between; box-shadow: var(--shadow); transition: 0.3s ease;
+        }
         .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 0.95rem; }
-        .badge { background: var(--indigo-soft); color: var(--indigo); font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid #e0e7ff; }
+        .badge { background: var(--accent-soft); color: var(--accent); font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid var(--border); }
         
         .links { display: flex; align-items: center; gap: 20px; }
         .links a { text-decoration: none; font-size: 0.88rem; font-weight: 600; color: var(--slate); transition: color 0.2s; }
-        .links a:hover, .btn-nav:hover { color: var(--indigo); }
-        .btn-nav { background: var(--indigo); color: #fff !important; padding: 8px 18px; border-radius: 9999px; transition: background 0.2s, transform 0.2s !important; }
-        .btn-nav:hover { background: var(--indigo-hover); transform: scale(1.03); }
+        .links a:hover { color: var(--accent); }
+        
+        .btn-nav { background: var(--accent); color: #fff !important; padding: 8px 18px; border-radius: 9999px; transition: 0.2s !important; border: none; font-weight: 600; font-size: 0.88rem; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;}
+        .btn-nav:hover { background: var(--accent-hover); transform: scale(1.03); }
 
-        /* Tombol Hamburger (Mobile) */
+        .btn-theme { background: transparent; border: 1px solid var(--border); border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--navy); transition: 0.2s; }
+        .btn-theme:hover { background: var(--accent-soft); color: var(--accent); }
+
         .nav-toggle { display: none; background: none; border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; cursor: pointer; color: var(--navy); }
         .nav-toggle svg { display: block; width: 22px; height: 22px; }
 
         .container { max-width: 1150px; margin: 40px auto 80px; padding: 0 24px; }
-        
-        /* Pengaturan margin atas agar saat menu diklik tidak tertutup navbar melayang */
         section { scroll-margin-top: 100px; }
 
+        /* ---------------------------------------------------------
+           3. HERO & PROFIL UTAMA
+        --------------------------------------------------------- */
         .hero { display: flex; align-items: center; gap: 40px; margin-bottom: 50px; padding: 20px 10px 0; }
         .hero-img-box { position: relative; flex-shrink: 0; }
-        .avatar { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; box-shadow: 0 10px 25px -5px rgba(15,23,42,0.15); background: #e2e8f0; }
-        .btn-edit { position: absolute; bottom: 4px; right: 4px; background: var(--indigo); color: #fff; border: 2px solid #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 10px rgba(79,70,229,0.3); transition: 0.2s; }
-        .btn-edit:hover { background: var(--indigo-hover); transform: scale(1.1); }
+        .avatar { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--card); box-shadow: var(--shadow); background: var(--border); transition: border-color 0.3s; }
         
-        .pill { display: inline-flex; align-items: center; gap: 8px; background: var(--card); border: 1px solid var(--border); padding: 6px 14px; border-radius: 9999px; font-size: 0.82rem; font-weight: 600; color: var(--slate); margin-bottom: 16px; box-shadow: var(--shadow); }
+        .btn-edit { position: absolute; bottom: 4px; right: 4px; background: var(--accent); color: #fff; border: 2px solid var(--card); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 10px rgba(37,99,235,0.3); transition: 0.2s; z-index: 10;}
+        .btn-edit:hover { background: var(--accent-hover); transform: scale(1.1); }
+        
+        .pill { display: inline-flex; align-items: center; gap: 8px; background: var(--card); border: 1px solid var(--border); padding: 6px 14px; border-radius: 9999px; font-size: 0.82rem; font-weight: 600; color: var(--slate); margin-bottom: 16px; box-shadow: var(--shadow); transition: 0.3s; }
         .dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; }
-        h1 { font-size: 2.3rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 14px; }
-        h1 span { color: var(--indigo); }
+        h1 { font-size: 2.3rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 14px; min-height: 80px;} /* Min-height for typing effect */
+        h1 span { color: var(--accent); }
         .hero p { font-size: 1.05rem; color: var(--slate); line-height: 1.65; max-width: 800px; }
 
+        /* ---------------------------------------------------------
+           4. BENTO GRID SYSTEM
+        --------------------------------------------------------- */
         .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow); transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; justify-content: space-between; position: relative; }
-        .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); border-color: #cbd5e1; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease; display: flex; flex-direction: column; position: relative; }
+        .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); border-color: var(--accent-hover); }
         
-        .card-featured { grid-column: span 8; background: linear-gradient(135deg, #fff 65%, var(--indigo-soft) 100%); border: 1.5px solid #c7d2fe; }
-        .tag { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--indigo); margin-bottom: 10px; display: inline-block; }
+        /* 3D Tilt Effect applied via JS to .card-featured */
+        .card-featured { grid-column: span 8; background: linear-gradient(135deg, var(--card) 40%, var(--accent-soft) 100%); border-color: var(--border); transform-style: preserve-3d; perspective: 1000px;}
+        .card-featured-inner { transform: translateZ(30px); /* Brings content forward in 3D */ }
+        .tag { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 10px; display: inline-block; }
         .card-featured h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 10px; }
         .card-featured p { color: var(--slate); font-size: 0.95rem; margin-bottom: 24px; max-width: 580px; }
-        .btn-launch { align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; background: var(--indigo); color: #fff; padding: 12px 22px; border-radius: 12px; font-weight: 700; font-size: 0.9rem; text-decoration: none; box-shadow: 0 4px 12px rgba(79,70,229,0.25); transition: 0.2s; }
-        .btn-launch:hover { background: var(--indigo-hover); transform: translateY(-2px); }
+        
+        .action-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+        .btn-launch { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; padding: 10px 20px; border-radius: 12px; font-weight: 700; font-size: 0.9rem; text-decoration: none; box-shadow: 0 4px 12px rgba(37,99,235,0.25); transition: 0.2s; border: none; cursor: pointer;}
+        .btn-launch:hover { background: var(--accent-hover); transform: translateY(-2px); }
+        .btn-secondary { background: var(--canvas); color: var(--navy); border: 1px solid var(--border); box-shadow: none; }
+        .btn-secondary:hover { border-color: var(--accent); background: var(--accent-soft); }
 
         .card-role { grid-column: span 4; }
-        .role-period { font-size: 0.8rem; font-weight: 700; color: var(--indigo); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; display: block; }
+        .role-period { font-size: 0.8rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; display: block; }
         .card-role h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
-        .card-role p, .card-career .desc, .card-edu p, .card-skills p, .card-social p { font-size: 0.88rem; color: var(--slate); line-height: 1.55; }
-        .role-highlight { margin-top: 18px; background: var(--indigo-soft); border-left: 3px solid var(--indigo); padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 0.82rem; color: var(--indigo-hover); font-weight: 600; }
+        .card-role p, .card-career .desc, .card-edu p, .card-skills p { font-size: 0.88rem; color: var(--slate); line-height: 1.55; }
+        .role-highlight { margin-top: 18px; background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 0.82rem; color: var(--accent); font-weight: 600; }
 
         .card-career { grid-column: span 7; }
-        .card-career h3, .card-edu h3, .card-skills h3, .card-social h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 16px; }
+        .card-career h3, .card-skills h3, .card-contact h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 16px; }
         .timeline { position: relative; padding-left: 24px; margin-bottom: 18px; border-left: 2px solid var(--border); }
         .timeline:last-child { margin-bottom: 0; }
-        .timeline::before { content: ''; position: absolute; left: -6px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--indigo); border: 2px solid #fff; box-shadow: 0 0 0 3px var(--indigo-soft); }
+        .timeline::before { content: ''; position: absolute; left: -6px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid var(--card); }
         .t-title { font-size: 0.95rem; font-weight: 700; }
         .t-time { font-size: 0.78rem; color: var(--slate); font-weight: 600; margin-bottom: 4px; }
 
-        .card-edu { grid-column: span 5; }
-        .edu-item { background: #f8fafc; border: 1px solid var(--border); padding: 14px; border-radius: 12px; margin-bottom: 12px; }
-        .edu-title { font-weight: 700; font-size: 0.9rem; }
-        .edu-meta { font-size: 0.78rem; color: var(--indigo); font-weight: 600; margin-bottom: 4px; }
-        .edu-thesis { font-size: 0.8rem; color: var(--slate); font-style: italic; }
+        .card-skills { grid-column: span 5; }
+        .pill-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+        .skill-pill { background: var(--canvas); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: var(--navy); transition: 0.2s;}
+        .skill-pill:hover { background: var(--accent-soft); color: var(--accent); border-color: var(--accent);}
+        
+        /* Widget Dual Feed Kompak */
+        .card-feed { grid-column: span 12; }
+        .feed-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 14px; }
+        .feed-item { display: flex; align-items: center; gap: 14px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px; box-shadow: var(--shadow); transition: 0.2s; text-decoration: none; }
+        .feed-item:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+        .feed-media { width: 48px; height: 48px; flex-shrink: 0; border-radius: 8px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .feed-media img { width: 100%; height: 100%; object-fit: cover; }
+        .feed-media svg { color: #e11d48; width: 24px; height: 24px; } 
+        .feed-desc { font-size: 0.88rem; font-weight: 600; color: var(--navy); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-        .card-skills { grid-column: span 7; }
-        .pill-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 20px; }
-        .skill-pill { background: #f1f5f9; border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: #334155; }
-        .cert-list { font-size: 0.84rem; color: var(--slate); display: grid; gap: 8px; border-top: 1px solid var(--border); padding-top: 14px; }
-        .cert-item { display: flex; align-items: center; gap: 8px; }
-        .cert-item svg { color: var(--indigo); flex-shrink: 0; }
+        /* ---------------------------------------------------------
+           5. FORMULIR KONTAK TERINTEGRASI
+        --------------------------------------------------------- */
+        .card-contact { grid-column: span 12; display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; }
+        .contact-info p { font-size: 0.9rem; color: var(--slate); margin-bottom: 20px; }
+        .social-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        .social-btn { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--canvas); color: var(--navy); text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: 0.2s; }
+        .social-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .wa-full { background: var(--accent); color: #fff !important; border-color: var(--accent); }
+        .wa-full:hover { background: var(--accent-hover); }
 
-        .card-social { grid-column: span 5; background: linear-gradient(135deg, #fff 0%, #f8fafc 100%); border-left: 4px solid var(--indigo); }
-        .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
-        .social-btn { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: #fff; color: var(--navy); text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: 0.2s; box-shadow: var(--shadow); }
-        .social-btn:hover { border-color: var(--indigo); color: var(--indigo); transform: translateY(-2px); }
-        .wa-full { grid-column: span 2; background: var(--indigo); color: #fff !important; justify-content: center; border-color: var(--indigo); }
-        .wa-full:hover { background: var(--indigo-hover); }
+        .form-group { display: flex; flex-direction: column; gap: 12px; }
+        .form-input { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px; font-size: 0.9rem; background: var(--canvas); color: var(--navy); font-family: inherit; transition: 0.2s; }
+        .form-input:focus { outline: none; border-color: var(--accent); }
+        textarea.form-input { resize: vertical; min-height: 100px; }
 
-        /* Modal */
-        .modal { position: fixed; inset: 0; background: rgba(15,23,42,0.6); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
-        .modal-box { background: #fff; width: 100%; max-width: 420px; padding: 30px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
-        .modal-box h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+        /* ---------------------------------------------------------
+           6. MODALS (Upload & Video Lightbox)
+        --------------------------------------------------------- */
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; opacity: 0; transition: opacity 0.3s ease;}
+        .modal.show { opacity: 1; display: flex; }
+        
+        .modal-box { background: var(--card); width: 100%; max-width: 440px; padding: 30px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border); transform: scale(0.95); transition: transform 0.3s ease;}
+        .modal.show .modal-box { transform: scale(1); }
+        
+        .modal-box h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--navy); }
         .modal-box p { font-size: 0.85rem; color: var(--slate); margin-bottom: 20px; }
-        .modal-input { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; margin-bottom: 14px; outline: none; }
-        .modal-input:focus { border-color: var(--indigo); }
-        .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
-        .btn-cancel { background: #f1f5f9; color: var(--slate); border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; }
-        .btn-confirm { background: var(--indigo); color: #fff; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        .modal-input { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; margin-bottom: 14px; outline: none; background: var(--canvas); color: var(--navy); }
+        .modal-input:focus { border-color: var(--accent); }
+        .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 6px; }
+        
+        .btn-cancel { background: var(--canvas); color: var(--slate); border: 1px solid var(--border); padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-cancel:hover { background: var(--border); }
+        .btn-confirm { background: var(--accent); color: #fff; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
+        .btn-confirm:hover { background: var(--accent-hover); }
 
-        footer { border-top: 1px solid var(--border); padding: 30px 24px; text-align: center; font-size: 0.85rem; color: var(--slate); background: #fff; }
+        /* Video Lightbox Specific */
+        .video-modal-box { max-width: 800px; padding: 10px; background: transparent; border: none; box-shadow: none; position: relative;}
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; background: #000; border: 1px solid var(--border); box-shadow: var(--shadow-lift);}
+        .video-container iframe, .video-container video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .close-video { position: absolute; top: -40px; right: 0; background: rgba(255,255,255,0.2); color: #fff; border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 1.2rem; cursor: pointer; transition: 0.2s;}
+        .close-video:hover { background: rgba(255,255,255,0.5); }
 
-        /* Responsif Mobile & Hamburger Menu */
+        footer { border-top: 1px solid var(--border); padding: 30px 24px; text-align: center; font-size: 0.85rem; color: var(--slate); background: var(--card); margin-top: 40px; transition: 0.3s; }
+
+        /* ---------------------------------------------------------
+           7. RESPONSIVITAS MOBILE
+        --------------------------------------------------------- */
         @media (max-width: 900px) {
             .hero { flex-direction: column; text-align: center; }
-            .card-featured, .card-role, .card-career, .card-edu, .card-skills, .card-social { grid-column: span 12; }
+            .card-featured, .card-role, .card-career, .card-edu, .card-skills, .card-contact { grid-column: span 12; }
+            .card-contact { grid-template-columns: 1fr; gap: 20px; }
             h1 { font-size: 1.9rem; }
+            .action-buttons { justify-content: center; }
         }
         @media (max-width: 640px) {
             .nav-toggle { display: block; }
-            .links {
-                display: none;
-                position: absolute;
-                top: 110%;
-                left: 0;
-                right: 0;
-                background: #ffffff;
-                flex-direction: column;
-                align-items: stretch;
-                padding: 16px 20px;
-                gap: 12px;
-                border: 1px solid var(--border);
-                border-radius: 16px;
-                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            }
+            .links { display: none; position: absolute; top: 110%; left: 0; right: 0; background: var(--card); flex-direction: column; align-items: stretch; padding: 16px 20px; gap: 12px; border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-lift); }
             .links.active { display: flex; }
             .links a { padding: 10px 0; border-bottom: 1px solid var(--canvas); font-size: 0.92rem; text-align: center; }
-            .btn-nav { text-align: center; padding: 12px !important; margin-top: 4px; }
-            
+            .btn-nav { text-align: center; padding: 12px !important; margin-top: 4px; justify-content: center;}
             header { padding: 0 12px; top: 10px; }
             .container { padding: 0 16px; margin-top: 20px; }
             .card { padding: 22px; }
-            .social-grid { grid-template-columns: 1fr; }
-            .wa-full { grid-column: span 1; }
         }
     </style>
 </head>
@@ -155,57 +248,66 @@
                 <span>VALENTINO WULLUR</span>
                 <span class="badge">MDP &bull; KBRU PALU</span>
             </div>
-            <button class="nav-toggle" id="menuToggle" aria-label="Buka Menu">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-            </button>
+            
             <div class="links" id="navLinks">
                 <a href="#about" onclick="closeNav()">Tentang</a>
                 <a href="#experience" onclick="closeNav()">Pengalaman</a>
-                <a href="#work" onclick="closeNav()">Karya & Solusi</a>
-                <a href="https://wa.me/6285757875464" target="_blank" rel="noopener noreferrer" class="btn-nav" onclick="closeNav()">Hubungi Saya</a>
+                <a href="#feed" onclick="closeNav()">Sorotan</a>
+                <a href="#contact" class="btn-nav" onclick="closeNav()">Hubungi Saya</a>
+            </div>
+
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <button class="btn-theme" id="themeToggle" title="Ganti Tema">
+                    <svg id="moonIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <svg id="sunIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </button>
+                <button class="nav-toggle" id="menuToggle" aria-label="Buka Menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
             </div>
         </nav>
     </header>
 
     <main class="container">
-        <!-- Bagian Tentang (ID untuk Target Navigasi) -->
+        <!-- Hero Section -->
         <section class="hero" id="about">
             <div class="hero-img-box">
-                <img id="userAvatar" 
-                     src="valen-image.png" 
-                     alt="Valentino Alexandro Wullur" 
-                     class="avatar"
-                     onerror="this.src='https://ui-avatars.com/api/?name=Valentino+Alexandro&background=4f46e5&color=fff&size=200'">
-                <button class="btn-edit" onclick="openEditModal()" title="Ubah Foto Profil">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                <img id="userAvatar" src="valen-image.png" alt="Valentino Alexandro Wullur" class="avatar" onerror="this.src='https://ui-avatars.com/api/?name=Valentino+Alexandro&background=2563eb&color=fff&size=200'">
+                <button class="btn-edit" onclick="openUploadModal()" title="Upload Konten/Profil Baru">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                 </button>
             </div>
             <div>
                 <div class="pill"><span class="dot"></span>Staf Marketing MDP &bull; PT Kalibesar Raya Utama Cabang Palu</div>
-                <h1>Welcome to my website — <span>Inovasi Digital & Analitis Pialang.</span></h1>
-                <p>Lulusan Ilmu Filsafat yang menempuh jalur profesional melalui Management Development Program (MDP) di PT Kalibesar Raya Utama. Berfokus pada analisa mitigasi risiko nasabah, representasi independen di sisi tertanggung, serta perancangan sistem web simulasi premi LOB terpadu di Sulawesi Tengah.</p>
+                <h1>Welcome to my website — <br><span id="typing-text" class="typewriter-text">Inovasi Digital & Analitis.</span></h1>
+                <p>Lulusan Ilmu Filsafat yang menempuh jalur profesional sebagai konsultan asuransi melalui Management Development Program (MDP) di PT Kalibesar Raya Utama dan saat ini berada di cabang Palu.</p>
             </div>
         </section>
 
-        <!-- Bento Grid Layout Utama -->
-        <section class="bento-grid" id="work">
-            <article class="card card-featured">
-                <div>
+        <!-- Grid Layout dengan class 'reveal' untuk animasi saat scroll -->
+        <section class="bento-grid" id="experience">
+            
+            <!-- Highlight Card dengan 3D Tilt -->
+            <article class="card card-featured reveal" id="tiltCard">
+                <div class="card-featured-inner">
                     <span class="tag">Proyek Terpilih &bull; Web Platform Internal</span>
-                    <h2>Portal KBRU Cabang Palu & Kalkulator Premi</h2>
-                    <p>Aplikasi web interaktif terstruktur untuk informasi kantor cabang serta simulasi perhitungan tarif Property All Risk (PAR), Motor Vehicle (MV), dan lini bisnis lainnya sesuai regulasi OJK.</p>
+                    <h2>Portal KBRU Cabang Palu</h2>
+                    <p>Butuh Asuransi untuk melindungi aset anda atau segala kebutuhan lainnya? Silahkan kunjungi website Konsultan Asuransi KBRU cabang Palu</p>
+                    <div class="action-buttons">
+                        <a href="https://valentinoalex19.github.io/web-portofolio-kbru-palu/" target="_blank" rel="noopener noreferrer" class="btn-launch">
+                            Buka Website KBRU
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        </a>
+                        <button onclick="openVideoModal()" class="btn-launch btn-secondary">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            Tonton Video Demo
+                        </button>
+                    </div>
                 </div>
-                <a href="https://valentinoalex19.github.io/web-portofolio-kbru-palu/" target="_blank" rel="noopener noreferrer" class="btn-launch">
-                    Buka Website KBRU Cabang Palu
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-                </a>
             </article>
 
-            <article class="card card-role">
+            <!-- Role Card -->
+            <article class="card card-role reveal" style="transition-delay: 0.1s;">
                 <div>
                     <span class="role-period">Oktober 2024 &mdash; Sekarang</span>
                     <h3>Staf Marketing (Lulusan MDP)</h3>
@@ -214,8 +316,8 @@
                 <div class="role-highlight">Lulusan Management Development Program (MDP) KBRU</div>
             </article>
 
-            <!-- Bagian Pengalaman (ID untuk Target Navigasi) -->
-            <article class="card card-career" id="experience">
+            <!-- Career Timeline -->
+            <article class="card card-career reveal" style="transition-delay: 0.2s;">
                 <h3>Riwayat Pengalaman Profesional</h3>
                 <div class="timeline">
                     <div class="t-title">Staf Marketing (MDP Graduate) &mdash; PT Kalibesar Raya Utama</div>
@@ -225,93 +327,122 @@
                 <div class="timeline">
                     <div class="t-title">Data Administration & Customer Service &mdash; Gereja Katolik Bunda Hati Kudus</div>
                     <div class="t-time">Maret 2023 &mdash; 2024 | Jakarta Pusat, DKI Jakarta</div>
-                    <div class="desc">Pengelolaan sistem basis data umat (BIDUK), tata kelola persuratan legal administratif, rekapitulasi data penggajian bulanan karyawan, serta manajemen relasi jemaat.</div>
-                </div>
-                <div class="timeline">
-                    <div class="t-title">Administrasi, Sekretariat & Asisten &mdash; Gereja Katolik St. Paulus</div>
-                    <div class="t-time">Februari 2022 &mdash; November 2022 | Kota Palu</div>
-                    <div class="desc">Digitalisasi basis data, administrasi legal formal keuskupan, serta pembina kelompok paduan suara pemuda di Kota Palu.</div>
                 </div>
                 <div class="timeline">
                     <div class="t-title">Tenaga Pendidik & Mentor Siswa &mdash; SMA Negeri 2 Manado</div>
                     <div class="t-time">Agustus 2019 &mdash; Juni 2020 | Manado, Sulawesi Utara</div>
-                    <div class="desc">Pengajaran kurikulum pendidikan moral dan pembimbingan organisasi siswa (ISKA) dalam membangun kepemimpinan dan kekompakan tim.</div>
                 </div>
             </article>
 
-            <article class="card card-edu">
-                <h3>Pendidikan & Latar Belakang</h3>
-                <div class="edu-item">
-                    <div class="edu-title">Sarjana Filsafat (S.Fil.)</div>
-                    <div class="edu-meta">STF Seminari Pineleng &bull; IPK 3,27 (2017 &ndash; 2022)</div>
-                    <div class="edu-thesis">Skripsi: "Konsep Original Position dalam A Theory of Justice John Rawls &mdash; Filsafat Politik"</div>
-                </div>
-                <div class="edu-item">
-                    <div class="edu-title">Formasi Seminari Xaverius Kakaskasen</div>
-                    <div class="edu-meta">Sulawesi Utara &bull; 2012 &ndash; 2016</div>
-                    <p style="font-size: 0.8rem; margin-top: 4px;">Membentuk disiplin, integritas tinggi, kepemimpinan etis, dan kemampuan berpikir kritis mendalam.</p>
-                </div>
-            </article>
-
-            <article class="card card-skills">
+            <!-- Skills Card -->
+            <article class="card card-skills reveal" style="transition-delay: 0.3s;">
                 <div>
-                    <h3>Domain Keahlian & Sertifikasi</h3>
-                    <p>Perpaduan pemikiran kritis filosofis, underwriting pialang asuransi, dan kemampuan rekayasa web.</p>
+                    <h3>Domain Keahlian Utama</h3>
+                    <p style="font-size: 0.88rem; color: var(--slate); line-height: 1.55;">Perpaduan pemikiran kritis filosofis, underwriting pialang asuransi, dan kemampuan rekayasa web.</p>
                 </div>
                 <div class="pill-group">
-                    <span class="skill-pill">Insurance Broking & Underwriting</span>
+                    <span class="skill-pill">Insurance Broking</span>
                     <span class="skill-pill">Property All Risk (PAR)</span>
                     <span class="skill-pill">Motor Vehicle (MV)</span>
                     <span class="skill-pill">SEOJK Compliance</span>
-                    <span class="skill-pill">HTML5 & Semantic UI</span>
-                    <span class="skill-pill">Modern CSS Architecture</span>
-                    <span class="skill-pill">JavaScript Application Logic</span>
-                    <span class="skill-pill">Critical Thinking & Ethics</span>
-                </div>
-                <div class="cert-list">
-                    <div class="cert-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg><span>Digital Marketing & Data Science Kickstart &mdash; <strong>Rakamin Academy (2023)</strong></span></div>
-                    <div class="cert-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg><span>Digital Marketing Fundamental Minicourse &mdash; <strong>RevoU (2023)</strong></span></div>
-                    <div class="cert-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg><span>Digital Marketing Fundamentals &mdash; <strong>HabisKerja.com (2022)</strong></span></div>
+                    <span class="skill-pill">HTML5, CSS & JS</span>
                 </div>
             </article>
 
-            <article class="card card-social">
-                <div>
-                    <h3>Jejaring & Media Sosial</h3>
-                    <p>Hubungi saya untuk diskusi penelaahan polis asuransi, kemitraan pialang korporasi, atau kolaborasi sistem web.</p>
+            <!-- ============================================== -->
+            <!-- WIDGET DUAL FEED (Menampilkan efek Skeleton saat loading)  -->
+            <!-- ============================================== -->
+            <article class="card card-feed reveal" id="feed" style="transition-delay: 0.4s;">
+                <h3>🚀 Proyek & Sertifikasi Terbaru</h3>
+                <p style="font-size: 0.85rem; color: var(--slate); margin-top:-8px;">Sorotan karya, portofolio sistem, dan sertifikasi keahlian ter-update.</p>
+                <div class="feed-grid" id="proyekContainer">
+                    <!-- Skeleton Loader -->
+                    <div class="feed-item skeleton" style="border:none;"><div class="feed-media"></div><div class="feed-desc">Loading...</div></div>
+                    <div class="feed-item skeleton" style="border:none;"><div class="feed-media"></div><div class="feed-desc">Loading...</div></div>
                 </div>
-                <div class="social-grid">
-                    <a href="https://wa.me/6285757875464" target="_blank" rel="noopener noreferrer" class="social-btn wa-full">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                        WhatsApp: 0857-5787-5464
-                    </a>
-                    <a href="https://www.linkedin.com/in/valentino-alexandro-wullur-72791024a" target="_blank" rel="noopener noreferrer" class="social-btn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn
-                    </a>
-                    <a href="https://www.instagram.com/valentinowullur/" target="_blank" rel="noopener noreferrer" class="social-btn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg> Instagram
-                    </a>
-                    <a href="https://www.facebook.com/valentino.wullur.14" target="_blank" rel="noopener noreferrer" class="social-btn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook
-                    </a>
-                    <a href="https://x.com/WullurAlexandro" target="_blank" rel="noopener noreferrer" class="social-btn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg> X (Twitter)
-                    </a>
+            </article>
+
+            <article class="card card-feed reveal" style="transition-delay: 0.5s;">
+                <h3>📝 Catatan Pengalaman Harian</h3>
+                <p style="font-size: 0.85rem; color: var(--slate); margin-top:-8px;">Dokumentasi lapangan, aktivitas profesional, dan pembaruan kegiatan harian.</p>
+                <div class="feed-grid" id="pengalamanContainer">
+                     <!-- Skeleton Loader -->
+                     <div class="feed-item skeleton" style="border:none;"><div class="feed-media"></div><div class="feed-desc">Loading...</div></div>
+                     <div class="feed-item skeleton" style="border:none;"><div class="feed-media"></div><div class="feed-desc">Loading...</div></div>
+                </div>
+            </article>
+
+            <!-- ============================================== -->
+            <!-- FORMULIR KONTAK TERINTEGRASI -->
+            <!-- ============================================== -->
+            <article class="card card-contact reveal" id="contact" style="transition-delay: 0.6s;">
+                <div class="contact-info">
+                    <h3>Mari Berkolaborasi!</h3>
+                    <p>Mencari solusi asuransi yang tepat untuk korporasi Anda, atau ingin mendiskusikan peluang kerja sama? Silakan kirimkan pesan langsung kepada saya melalui form, atau hubungi saluran di bawah ini.</p>
+                    <div class="social-grid">
+                        <a href="https://wa.me/6285757875464" target="_blank" class="social-btn wa-full">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                            WhatsApp: 0857-5787-5464
+                        </a>
+                        <a href="https://www.linkedin.com/in/valentino-alexandro-wullur-72791024a" target="_blank" class="social-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> 
+                            LinkedIn Profile
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm" class="form-group" onsubmit="submitContactForm(event)">
+                        <input type="text" id="contactName" class="form-input" placeholder="Nama Lengkap atau Perusahaan" required>
+                        <input type="email" id="contactEmail" class="form-input" placeholder="Alamat Email Anda" required>
+                        <textarea id="contactMessage" class="form-input" placeholder="Tuliskan pesan, tujuan kolaborasi, atau pertanyaan Anda di sini..." required></textarea>
+                        <button type="submit" id="btnContactSubmit" class="btn-nav" style="justify-content: center; padding: 12px; width: 100%;">Kirim Pesan Sekarang</button>
+                    </form>
                 </div>
             </article>
         </section>
     </main>
 
-    <!-- Modal Upload Foto Profil (Terhubung ke Google Drive + Password) -->
-    <div id="editModal" class="modal">
+    <!-- ============================================== -->
+    <!-- MODAL 1: MULTI-UPLOAD (PROFIL, PROYEK, PENGALAMAN)-->
+    <!-- ============================================== -->
+    <div id="uploadModal" class="modal">
         <div class="modal-box">
-            <h3>Upload Foto Profil Baru</h3>
-            <p>Masukkan sandi pemilik, lalu pilih foto dari perangkat Anda untuk di-upload secara otomatis ke Google Drive.</p>
-            <input type="password" id="ownerPassword" class="modal-input" placeholder="Masukkan Sandi Pemilik" style="margin-bottom: 12px;">
-            <input type="file" id="imageFileInput" class="modal-input" accept="image/*">
+            <h3>Upload Konten Baru</h3>
+            <p>Pilih kategori tujuan upload ke database Google Drive Anda.</p>
+            
+            <input type="password" id="ownerPassword" class="modal-input" placeholder="Masukkan Sandi Pemilik">
+            
+            <select id="uploadCategory" class="modal-input" onchange="toggleDescriptionField()">
+                <option value="profil">1. Ubah Foto Profil Utama</option>
+                <option value="proyek">2. Tambah Proyek / Sertifikasi</option>
+                <option value="pengalaman">3. Tambah Pengalaman Harian</option>
+            </select>
+            
+            <input type="text" id="uploadDescription" class="modal-input" placeholder="Tulis Keterangan Singkat / Judul File..." style="display: none;">
+            <input type="file" id="imageFileInput" class="modal-input" accept="image/*,application/pdf">
+            
             <div class="modal-actions">
-                <button class="btn-cancel" onclick="closeEditModal()">Batal</button>
-                <button class="btn-confirm" id="uploadBtn" onclick="uploadNewAvatar()">Upload & Simpan</button>
+                <button class="btn-cancel" onclick="closeModal('uploadModal')">Batal</button>
+                <button class="btn-confirm" id="uploadBtn" onclick="uploadContent()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    Upload Sekarang
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- MODAL 2: VIDEO DEMO LIGHTBOX -->
+    <!-- ============================================== -->
+    <div id="videoModal" class="modal">
+        <div class="modal-box video-modal-box">
+            <button class="close-video" onclick="closeModal('videoModal')">&times;</button>
+            <div class="video-container" id="videoWrapper">
+                <!-- Video/Iframe Placeholder. Jika Anda punya URL YouTube, ganti tag div ini dengan iframe -->
+                <div style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#18181b; color:#a1a1aa; flex-direction:column; gap:10px;">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    <p>Video Demo Segera Hadir.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -321,104 +452,225 @@
     </footer>
 
     <script>
-        // Masukkan URL Web App Google Apps Script Anda di sini:
+        // =========================================================================
+        // GANTI DENGAN URL WEB APP GOOGLE APPS SCRIPT ANDA DI BAWAH INI:
+        // =========================================================================
         const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynS4bSMHE22xOYtqq1dulKz7UQ19Wk8Y5MGQby3ZWz8OEC5ryXWqD8mVcurYL9MdGWBw/exec";
 
-        // Hamburger Menu Mobile Toggle
+        /* --- 1. DARK MODE TOGGLE --- */
+        const themeToggle = document.getElementById('themeToggle');
+        const moonIcon = document.getElementById('moonIcon');
+        const sunIcon = document.getElementById('sunIcon');
+        
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            moonIcon.style.display = 'none';
+            sunIcon.style.display = 'block';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                moonIcon.style.display = 'block'; sunIcon.style.display = 'none';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                moonIcon.style.display = 'none'; sunIcon.style.display = 'block';
+            }
+        });
+
+        /* --- 2. MOBILE MENU --- */
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+        function closeNav() { navLinks.classList.remove('active'); }
 
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
+        /* --- 3. ANIMASI SCROLL REVEAL (Intersection Observer) --- */
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Animasi hanya terjadi sekali
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
 
-        function closeNav() {
-            navLinks.classList.remove('active');
+        /* --- 4. ANIMASI TEKS MESIN KETIK (Typing Effect) --- */
+        const typingText = document.getElementById('typing-text');
+        const phrases = ["Curiosity, Analitis, dan Inovatif.", "Konsultan Pialang Independen.", "Musik dan Pelayanan Gereja."];
+        let phraseIndex = 0; let letterIndex = 0; let isDeleting = false;
+
+        function typeLoop() {
+            const currentPhrase = phrases[phraseIndex];
+            if(isDeleting) {
+                typingText.innerText = currentPhrase.substring(0, letterIndex - 1);
+                letterIndex--;
+            } else {
+                typingText.innerText = currentPhrase.substring(0, letterIndex + 1);
+                letterIndex++;
+            }
+            
+            let typingSpeed = isDeleting ? 50 : 100;
+            
+            if(!isDeleting && letterIndex === currentPhrase.length) {
+                typingSpeed = 2500; // Pause sebelum hapus
+                isDeleting = true;
+            } else if(isDeleting && letterIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typingSpeed = 500; // Pause sebelum ngetik kata baru
+            }
+            setTimeout(typeLoop, typingSpeed);
         }
+        setTimeout(typeLoop, 1500); // Mulai setelah animasi halaman selesai
 
-        // Otomatis Ambil Foto Terbaru dari Google Drive saat halaman dimuat
-        window.addEventListener('DOMContentLoaded', () => {
-            fetchLatestAvatar();
+        /* --- 5. EFEK 3D TILT PADA KARTU UTAMA --- */
+        const tiltCard = document.getElementById('tiltCard');
+        tiltCard.addEventListener('mousemove', (e) => {
+            const rect = tiltCard.getBoundingClientRect();
+            const x = e.clientX - rect.left; // x position within the element
+            const y = e.clientY - rect.top;  // y position within the element
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -5; // Max rotasi 5 derajat
+            const rotateY = ((x - centerX) / centerX) * 5;
+            
+            tiltCard.style.transform = `translateY(-6px) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+        tiltCard.addEventListener('mouseleave', () => {
+            tiltCard.style.transform = `translateY(-6px) perspective(1000px) rotateX(0deg) rotateY(0deg)`;
         });
 
-        function fetchLatestAvatar() {
+        /* --- 6. FETCH DATA GOOGLE DRIVE (Dengan penghapusan Skeleton) --- */
+        window.addEventListener('DOMContentLoaded', fetchAllData);
+
+        function fetchAllData() {
             if (!APPS_SCRIPT_URL.includes("http")) return;
             
-            fetch(APPS_SCRIPT_URL)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === "success" && data.url) {
-                        document.getElementById('userAvatar').src = data.url;
-                    }
-                })
-                .catch(error => console.error("Gagal memuat foto profil:", error));
+            fetch(APPS_SCRIPT_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ action: "fetchData" })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    if (data.profilUrl) document.getElementById('userAvatar').src = data.profilUrl;
+                    renderFeed('proyekContainer', data.proyekList);
+                    renderFeed('pengalamanContainer', data.pengalamanList);
+                }
+            })
+            .catch(err => console.error("Gagal memuat data:", err));
         }
 
-        function openEditModal() { document.getElementById('editModal').style.display = 'flex'; }
-        
-        function closeEditModal() {
-            document.getElementById('editModal').style.display = 'none';
-            document.getElementById('ownerPassword').value = '';
-            document.getElementById('imageFileInput').value = '';
+        function renderFeed(containerId, list) {
+            const container = document.getElementById(containerId);
+            if (!list || list.length === 0) {
+                container.innerHTML = '<p style="font-size:0.85rem; color:var(--slate);">Belum ada data terbaru.</p>';
+                return;
+            }
+            container.innerHTML = list.map(item => {
+                const isPDF = item.type === 'application/pdf';
+                const mediaContent = isPDF 
+                    ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`
+                    : `<img src="${item.url}" alt="Lampiran" onerror="this.style.display='none'">`;
+                return `
+                <a href="${item.url}" target="_blank" class="feed-item">
+                    <div class="feed-media">${mediaContent}</div>
+                    <div class="feed-desc">${item.description || 'Lihat Dokumen / Pembaruan'}</div>
+                </a>`;
+            }).join('');
         }
 
-        // Fungsi Upload Gambar ke Google Drive via Apps Script
-        function uploadNewAvatar() {
+        /* --- 7. MODALS LOGIC (Upload & Video) --- */
+        function openUploadModal() { 
+            const m = document.getElementById('uploadModal');
+            m.classList.add('show');
+            toggleDescriptionField(); 
+        }
+        function openVideoModal() {
+            document.getElementById('videoModal').classList.add('show');
+        }
+        function closeModal(modalId) {
+            const m = document.getElementById(modalId);
+            m.classList.remove('show');
+            if(modalId === 'uploadModal') {
+                document.getElementById('ownerPassword').value = '';
+                document.getElementById('uploadDescription').value = '';
+                document.getElementById('imageFileInput').value = '';
+            }
+        }
+        // Tutup modal jika klik di luar box
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('show');
+            }
+        }
+
+        function toggleDescriptionField() {
+            const cat = document.getElementById('uploadCategory').value;
+            const descInput = document.getElementById('uploadDescription');
+            descInput.style.display = (cat === 'profil') ? 'none' : 'block';
+            if(cat === 'profil') descInput.value = '';
+        }
+
+        /* --- 8. UPLOAD & CONTACT FORM SUBMIT --- */
+        function uploadContent() {
             const password = document.getElementById('ownerPassword').value;
+            const category = document.getElementById('uploadCategory').value;
+            const description = document.getElementById('uploadDescription').value;
             const fileInput = document.getElementById('imageFileInput');
             const uploadBtn = document.getElementById('uploadBtn');
             
-            if (!password) {
-                alert("Mohon masukkan sandi pemilik!");
-                return;
-            }
-
-            if (fileInput.files.length === 0) {
-                alert("Silakan pilih file gambar terlebih dahulu!");
-                return;
-            }
+            if (!password) { alert("Sandi pemilik wajib diisi!"); return; }
+            if (fileInput.files.length === 0) { alert("Pilih file terlebih dahulu!"); return; }
 
             const file = fileInput.files[0];
             const reader = new FileReader();
-
-            uploadBtn.innerText = "Mengunggah...";
-            uploadBtn.disabled = true;
+            uploadBtn.innerHTML = "Mengunggah..."; uploadBtn.disabled = true;
 
             reader.onload = function(e) {
                 const base64Data = e.target.result.split(',')[1];
-                
-                const payload = {
-                    password: password,
-                    fileName: file.name,
-                    mimeType: file.type,
-                    base64Data: base64Data
-                };
+                const payload = { action: "upload", password: password, category: category, description: description, fileName: file.name, mimeType: file.type, base64Data: base64Data };
 
                 fetch(APPS_SCRIPT_URL, {
-                    method: "POST",
-                    body: JSON.stringify(payload)
-                })
-                .then(response => response.json())
-                .then(data => {
+                    method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload)
+                }).then(res => res.json()).then(data => {
                     if (data.status === "success") {
-                        alert("Foto profil berhasil di-upload ke Google Drive!");
-                        fetchLatestAvatar();
-                        closeEditModal();
-                    } else {
-                        alert("Gagal: " + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    alert("Terjadi kesalahan koneksi.");
-                })
-                .finally(() => {
-                    uploadBtn.innerText = "Upload & Simpan";
+                        alert("Berkas berhasil di-upload!"); fetchAllData(); closeModal('uploadModal');
+                    } else { alert("Gagal: " + data.message); }
+                }).catch(err => alert("Terjadi kesalahan jaringan.")).finally(() => {
+                    uploadBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload Sekarang`; 
                     uploadBtn.disabled = false;
                 });
             };
-
             reader.readAsDataURL(file);
+        }
+
+        function submitContactForm(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnContactSubmit');
+            const payload = {
+                action: "contactForm",
+                name: document.getElementById('contactName').value,
+                email: document.getElementById('contactEmail').value,
+                message: document.getElementById('contactMessage').value
+            };
+            btn.innerText = "Mengirim Pesan..."; btn.disabled = true;
+
+            fetch(APPS_SCRIPT_URL, {
+                method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload)
+            }).then(res => res.json()).then(data => {
+                if (data.status === "success") {
+                    alert("Pesan Anda telah terkirim!"); document.getElementById('contactForm').reset();
+                } else { alert("Gagal: " + data.message); }
+            }).catch(err => alert("Error jaringan.")).finally(() => {
+                btn.innerText = "Kirim Pesan Sekarang"; btn.disabled = false;
+            });
         }
     </script>
 </body>
